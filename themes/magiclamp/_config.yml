@@ -6,7 +6,7 @@ menu:
   tags: tags
   about: about
   resume: resume
-  commonweal: 404.html
+  # commonweal: 404.html
 
 # Place your favicon.ico to /source directory.
 favicon: /favicon.ico
