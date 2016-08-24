@@ -6,8 +6,8 @@ tags:
      - 旅行 
 ---
 
-> 自从毕业以来，就去了好多地方。人生就是要来一场说走就走的旅行不是吗？！在大学里面一直没有机会去，尽管以前也随亲人旅游过，不过印象都不深刻了:) 工作了也有经济来源了，就走一遭了。
-有时间就来这里更新我的足迹。
+> *自从毕业以来，就去了好多地方。人生就是要来一场说走就走的旅行不是吗？！在大学里面一直没有机会去，尽管以前也随亲人旅游过，不过印象都不深刻了:) 工作了也有经济来源了，就走一遭了。
+有时间就来这里更新我的足迹。*
 
 
 ***
@@ -50,4 +50,30 @@ tags:
 ![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f6c1w404u1j218g0tjtmn.jpg "湖边的栈道")
 ![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f6c1pqnc45j218g0tj13s.jpg "达里诺尔湖的日落1")
 ![](http://ww1.sinaimg.cn/large/a1ac93f3gw1f6c1tloilzj218g0tj47f.jpg "达里诺尔湖的日落2")
+
+
+# 第四站： 下江南
+### 时间：2014年9月8日 （中秋节）
+
+没白来，真是上有天堂，下有苏杭。第一天就在杭州落脚的，白天去了趟西溪湿地（电影《非诚勿扰》的拍摄地之一），晚上游了圈西湖，见到了传说中的断桥，白素贞与许仙就在这里相会。
+杭州的小吃真心不错。当然，这次我就不放图来馋大家了:) 
+
+![](http://ww4.sinaimg.cn/large/a1ac93f3gw1f74vvx08tpj20tj18g17g.jpg "西溪湿地的塔")
+![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f74vx6d91kj218g0tjatn.jpg "在塔上眺望西溪湿地，很美")
+
+之后就在杭州周边的西塘和乌镇玩了一天，乌镇的夜景太赞，土菜馆的水乡菜特好吃！！！
+
+![](http://ww4.sinaimg.cn/large/a1ac93f3gw1f74vxqfpzpj218g0tjk6x.jpg "西塘，烟雨长廊")
+![](http://ww2.sinaimg.cn/large/a1ac93f3gw1f74vxjk60ej218g0tjqhm.jpg "诗情画意就是这样了吧")
+![](http://ww4.sinaimg.cn/large/a1ac93f3gw1f74vxfzn1fj218g0tjh4d.jpg "水乡的画面就这样静止下来")
+
+![](http://ww4.sinaimg.cn/large/a1ac93f3gw1f74vy110twj218g0tjh03.jpg "乌镇的夜，灯红酒绿")
+![](http://ww4.sinaimg.cn/large/a1ac93f3gw1f74vxvprjdj218g0tjtlf.jpg "乌镇的夜，在这里吃的晚饭")
+
+最后是玩的周庄，大名鼎鼎的沈万三的老家就在这里，不过感觉周庄没啥玩的，沈厅和张厅值得看
+
+![](http://ww4.sinaimg.cn/large/a1ac93f3gw1f74vy91gs3j218g0tjh87.jpg "周庄")
+
+
+
 
