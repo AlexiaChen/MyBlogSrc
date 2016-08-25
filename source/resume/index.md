@@ -4,48 +4,49 @@ title: resume
 
 # 个人信息
 ***
- - 陈绍涵/男/1992.03.16
- - 籍贯：云南
- - 本科/大连民族大学/计算机科学与技术系/2010.7至2014.7
- - 工作年限: 3年/ 2013-07 至 2016.09
- - 豆瓣主页：https://www.douban.com/people/foo_hack/
- - 技术博客：http://www.cnblogs.com/foohack/
- - GitHub: https://github.com/AlexiaChen （上面有一些个人的大学作品和个人业余项目）
- - Linkedin: https://www.linkedin.com/in/mathxhchen
- - 个人博客: http://mathxh-love.org/blog
+ - **陈绍涵**/男/1992.03.16
+ - **籍贯**：云南
+ - **本科**/大连民族大学/计算机科学与技术系/2010.7至2014.7
+ - **工作年限**: 3年/ 2013-07 至 2016.09
+ - **豆瓣主页**：https://www.douban.com/people/foo_hack/
+ - **技术博客**：http://www.cnblogs.com/foohack/
+ - **GitHub**: https://github.com/AlexiaChen （上面有一些个人的大学作品和个人业余项目）
+ - **Linkedin**: https://www.linkedin.com/in/mathxhchen
+ - **个人博客**: http://mathxh-love.org/blog
 
 # 联系方式
 ***
- - 邮箱: <a href="mailto:brainfvck@foxmail.com?subject=Hello&body=Ask Me Some Questions">brainfvck@foxmail.com</a>
- - 微信号：foo_hack
- - QQ：442499771
+ - **邮箱**: <a href="mailto:brainfvck@foxmail.com?subject=Hello&body=Ask Me Some Questions">brainfvck@foxmail.com</a>
+ - **微信号**：foo_hack
+ - **QQ**：442499771
 
 # 自我描述及评价
 ***
 - 对于新技术保持好奇与激情，对新技术有较好的学习研究能力及解决问题的能力
-- 经常参与开源社区。对英文网络资源轻车熟路，熟练阅读相关技术英文文档，满足基本的英文书写能力。
-- 熟悉C/C++以及STL。了解Python，能使用Python完成简单的脚本自动化任务
-- 熟悉C++ UI框架Qt，使用过Boost库的Boost.Asio，以及boost其他模块
-- 使用过java以及java相关的工具链/生态链，框架包括SpringMVC，Apache Commons, EhCache,MyBatis，Quartz，log4j，Dom4j，Gson等。工具包括Maven，Tomcat，Eclispe等
+- 经常参与开源社区。对英文网络资源轻车熟路，熟练阅读相关技术英文文档，满足基本的英文书写能力
+- 熟悉C/C++以及STL，并且熟悉C++ UI框架Qt。以及C++的准标准库Boost，使用过Boost.asio模块，以及boost的RAII
+- 了解Python，用Python完成过简单的脚本自动化任务
+- 使用过java以及java相关的工具链/生态链，框架或库包括SpringMVC，Apache Commons, EhCache,MyBatis，Quartz，log4j，Dom4j，Gson等。编译构建工具包括Maven，Tomcat，Eclispe等
 - 熟练使用SVN，Git版本控制工具
-- 熟悉Linux基本命令，有跨平台研发经验
-- 了解数据库，熟悉SQL，使用过SQLite，MySQL。使用过的NoSQL数据库有Memcached，Redis，Cassandra
+- 熟悉Linux基本命令，有跨平台项目研发经验
+- 熟悉关系数据库，熟悉SQL，使用过SQLite，MySQL。使用过的NoSQL数据库有Memcached，Redis，Cassandra
 - 了解消息中间件，使用过ActiveMQ
-- 了解Html/CSS，Javascript。使用过Bootstrap框架，jQuery库，Highchart图表库开发过前端页面，了解RESTful API。
-- 了解TCP/IP协议，Http协议，Ftp协议
-- 熟悉windows操作系统基本原理，大学使用win32 SDK开发，也了解Intel x86汇编（能基本看懂反汇编）
+- 熟悉Html/CSS，Javascript。使用过Bootstrap框架，jQuery库，Highchart图表库开发过前端页面，了解RESTful API设计
+- 熟悉TCP/IP协议族，Http，Ftp协议
+- 熟悉windows操作系统基本原理以及win32 SDK，了解Windows内核，有半年windows内核驱动开发经验
+- 了解x86汇编语言，基本能看懂编译器的反汇编
 
 # 工作经历
 ***
 ## 北京神州泰岳信息工程技术有限公司 （2015.10 至 2016.09）
 
-- 行业：计算机软件
-- 职位：数据处理基础平台研发工程师
-- 部门：研发部
-- 岗位职责：为中国气象局研发气象数据处理基础平台软件，为气象局其他部门提供基础服务
+- **行业**：计算机软件
+- **职位**：数据处理基础平台研发工程师
+- **部门**：研发部
+- **岗位职责**：为中国气象局研发气象数据处理基础平台软件，为气象局其他部门提供基础服务
 
 ### Nwfd/Lwfd项目
-项目描述：Nwfd系统是为中国国家气象局（国家级）研发的基础数据处理平台，Lwfd系统是为国家各省（省级）部署配套的数据处理分发平台，与Nwfd系统配合对接完成气象预报数据的分发，
+**项目描述**：Nwfd系统是为中国国家气象局（国家级）研发的基础数据处理平台，Lwfd系统是为国家各省（省级）部署配套的数据处理分发平台，与Nwfd系统配合对接完成气象预报数据的分发，
 预报修改，上传，处理，入库工作流程。
 
 - 编写格点升尺度插值算法部分模块，分发模块中的Ftp下载上传模块，Http下载上传模块，MQ消息推送模块
@@ -54,13 +55,13 @@ title: resume
 - 维护该系统，修正线上系统BUG
 
 ### Nwfd/Lwfd监控项目
-项目描述：为了方便相关气象工作人员实时了解数据处理平台处理产品的情况，特别针对Nwfd/Lwfd系统配套开发了一个对内部的独立的Web页面监控软件。
+**项目描述**：为了方便相关气象工作人员实时了解数据处理平台处理产品的情况，特别针对Nwfd/Lwfd系统配套开发了一个对内部的独立的Web页面监控软件。
 
 - 调整前端Web互交显示，在前端Web加入针对产品的基本操作指令，通过Ajax请求访问后端
 - 独立实现该项目的后台整个业务逻辑，实现数据库连接池
 
 ### NCL项目
-项目描述：与Nwfd和Lwfd系统无关，另一个独立项目。方便气象局工作人员查看气象产品数据，数据以Web前端可视化的方式展示，数据展示主要是箱线图和降水量柱状图，概率气象色斑图。
+**项目描述**：与Nwfd和Lwfd系统无关，另一个独立项目。方便气象局工作人员查看气象产品数据，数据以Web前端可视化的方式展示，数据展示主要是箱线图和降水量柱状图，概率气象色斑图。
 
 - 后台实现部分的产品或新产品数据业务逻辑
 - 前端增加新产品的数据显示图表，使用highchart画出气象数据图
@@ -70,27 +71,27 @@ title: resume
 
 ## 北京星天宇科技有限公司 （2014.07 至 2015.10）
 
-- 行业：航空航天
-- 职位：C/C++ 软件研发工程师
-- 部门： 研发部
-- 岗位职责： 研发航空航天相关设备的配套软件
+- **行业**：航空航天
+- **职位**：C/C++ 软件研发工程师
+- **部门**： 研发部
+- **岗位职责**： 研发航空航天相关设备的配套软件
 
 ### BSDP项目
-项目描述：BSDP项目是为Cortex系列的遥测设备编写的数据处理软件。
+**项目描述**：BSDP项目是为Cortex系列的遥测设备编写的数据处理软件。
 
 - 使用Qt编写项目UI界面并实现相关的功能模块，UI界面主要是数据的显示。
 - 使用boost.asio作为网络通信I/O库，为Cortex遥测设备编写访问控制协议，该协议基于TCP。
 - 使用Python编写PCM遥测包的序列检测程序提供给测试部门使用
 
 ### Novella项目
-项目描述：Novella是英国挪维拉卫星通讯公司，该项目为其中的一个系列的变频器编写访问控制SDK。
+**项目描述**：Novella是英国挪维拉卫星通讯公司，该项目为其中的一个系列的变频器编写访问控制SDK。
 
 - 使用Qt的串口通信模块为Novella变频器编写远控接口SDK，串口是RS232。该SDK提供给甲方（中国空间技术研究院）使用
 - 完全独立实现该设备基于RS232串口的通信协议，SDK中包含基本的getter，setter方法为变频器设置基本参数
 - 使用DoxyGen生成SDK的API文档
 
 ### Rtsp监控
-项目描述：通过IP Camera传输过来的RTSP流实现实时监控，为货运飞行器提供机舱环境的实时监控。
+**项目描述**：通过IP Camera传输过来的RTSP流实现实时监控，为货运飞行器提供机舱环境的实时监控。
 
 - 使用Live555实现IP Camera传输到PC机上的RTSP流（RTSP协议），RTSP协议承载的是H264编码的视频帧序列，获取每帧的buffer
 - 使用FFmpeg作为解码模块将传输过来的H264帧逐个解码并转换成图像显示
@@ -100,13 +101,13 @@ title: resume
 
 ## 北京闻亭泰科技术发展有限公司 （2013.07 至 2014.06 实习）
 
-- 行业： 电子硬件，半导体嵌入式
-- 职位：C/C++ 系统软件研发工程师
-- 部门：研发部
-- 岗位职责：研发C/C++系统软件
+- **行业**： 电子硬件，半导体嵌入式
+- **职位**：C/C++ 系统软件研发工程师
+- **部门**：研发部
+- **岗位职责**：研发C/C++系统软件
 
 ### V6项目
-项目描述：V6是参照TI公司自己订制的板子，软件，硬件开发（FPGA）都有涉及。软件层面编写SDK与V6板子通信。最终提供给客户进行二次开发。
+**项目描述**：V6是参照TI公司自己订制的板子，软件，硬件开发（FPGA）都有涉及。软件层面编写SDK与V6板子通信。最终提供给客户进行二次开发。
 
 - 把V6项目的软件模块Vsiual Studio工程替换为Cmake，用Cmake进行项目的 跨平台构建和编译打包。
 - 使用win32 SDK为V6编写windows环境下的驱动安装模块和卸载模块
@@ -117,13 +118,13 @@ title: resume
 - 编写V6项目软件的UI界面，使用Qt开发
 
 ### 3D打印机项目
-项目描述：3D模型打印
+**项目描述**：3D模型打印
 
 - 研究3D打印机软件的切片算法，将3D打印机的STL文件切片为图片序列，提供给3D打印机打印（因为打印机的原理是一层一层的打印上去形成模型的）。
 - 为了移植切片算法到该项目，独自阅读B9Creator开源3D打印软件其中的切片模块源码，并完成移植，最终做成库供上层软件调用。
 
 ### 3D测量系统
-项目描述：采用TI（德州仪器）公司的3D测量系统解决方案，使用高清摄像头扫描实物并得到3D点云图像模型，再对点云模型进行处理（复原，染色，渲染）。最终提供给3D打印机使用。
+**项目描述**：采用TI（德州仪器）公司的3D测量系统解决方案，使用高清摄像头扫描实物并得到3D点云图像模型，再对点云模型进行处理（复原，染色，渲染）。最终提供给3D打印机使用。
 
  - 独立搭建该系统的硬件环境和软件环境
 
