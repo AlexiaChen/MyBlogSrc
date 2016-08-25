@@ -32,6 +32,10 @@ icon_font: default
 # https://github.com/chriskempson/tomorrow-theme
 highlight_theme: night
 
+# title
+links_title: Links
+links:
+  老唐的博客: https://dendise7engithub.github.io/
 
 social:
   GitHub: https://github.com/AlexiaChen
