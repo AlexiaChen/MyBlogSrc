@@ -19,7 +19,7 @@ git push -u git@github.com:AlexiaChen/MyBlogSrc.git master
 hexo generate
 
 rm -rf $blogTargetFiles
-cp $blogSrcGen $blogTarget
+cp -r $blogSrcGen $blogTarget
 
 
 cd $blogHome
