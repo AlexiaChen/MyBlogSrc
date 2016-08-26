@@ -1,10 +1,10 @@
 
 #blog 自动化备份更新部署
 
-blogTargetFiles="~/Desktop/myblog/blog/*"
-blogTarget="~/Desktop/myblog/blog"
-blogHome="~/Desktop/myblog"
-blogSrc="~/Desktop/blogsrc"
+blogTargetFiles="$HOME/Desktop/myblog/blog/*"
+blogTarget="$HOME/Desktop/myblog/blog"
+blogHome="$HOME/Desktop/myblog"
+blogSrc="$HOME/Desktop/blogsrc"
 
 cd $blogSrc
 
