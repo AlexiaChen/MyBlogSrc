@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 永恒未知处
-subtitle: 永恒未知处
-description:
+title: 西域不夜城
+subtitle: 西域不夜城
+description: 系统软件工程师
 author: MathxH Chen
 language: en
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://mathxh-love.org/blog
+url: https://alexiachen.github.io/blog
 root: /blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
