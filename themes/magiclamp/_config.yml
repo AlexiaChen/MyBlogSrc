@@ -89,14 +89,15 @@ duoshuo_info: # give up duoshuo
   user_id: 2405394
   admin_nickname: MathxH
 
+
 # share server
 # JiaThis share
 jiathis: false
 
 # duoshuo share
-duoshuo_share: false # give up duoshuo
+duoshuo_share: true # give up duoshuo
 # duoshuo hot artical
-duoshuo_hotartical: false # give up duoshuo
+duoshuo_hotartical: true # give up duoshuo
 
 # baidu share
 baidu_share: true
@@ -117,7 +118,7 @@ suprise:
 
 # donate
 donate:
-  enable: true
+  enable: false
   text: 仅仅是一个功能
   wechat: 
   alipay: 
