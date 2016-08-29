@@ -89,6 +89,9 @@ duoshuo_info: # give up duoshuo
   user_id: 2405394
   admin_nickname: MathxH
 
+duoshuo:
+  shortname:mathxh
+
 
 # share server
 # JiaThis share
