@@ -89,8 +89,9 @@ duoshuo_info: # give up duoshuo
   user_id: 2405394
   admin_nickname: MathxH
 
-duoshuo:
-  duoshuo_shortname: mathxh
+
+
+duoshuo_shortname: mathxh
 
 
 # share server
