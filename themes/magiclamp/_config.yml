@@ -128,10 +128,10 @@ donate:
   alipay: 
 
 # 不蒜子统计
-busuanzi: true
+busuanzi: false
 
 busuanzi_count:
-   enable: true
+   enable: false
 
 # 效果：本站访客数12345人次
 site_uv: true
@@ -144,7 +144,7 @@ site_pv_header: 本站总访问量
 site_pv_footer: 次
 
 # 效果：本文总阅读量12345次
-page_pv: true
+page_pv: false
 page_pv_header: 本文总阅读量
 page_pv_footer: 次
 
