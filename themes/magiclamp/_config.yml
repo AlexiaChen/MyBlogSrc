@@ -90,7 +90,7 @@ duoshuo_info: # give up duoshuo
   admin_nickname: MathxH
 
 duoshuo:
-  shortname:mathxh
+  duoshuo_shortname: mathxh
 
 
 # share server
