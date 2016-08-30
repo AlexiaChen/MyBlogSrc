@@ -1,5 +1,5 @@
 ---
-title: logic-equivalence
+title: 软件设计中的逻辑等价
 date: 2016-04-28 09:29:14
 tags:
     - 软件工程
