@@ -199,7 +199,7 @@ P (fact) -> λ n .
 然后，神奇的事发生了,细心的人发现，函数 P (fact) 与之前定义的函数fact相等，
  - P (fact) = fact
 
- 我们发现了函数P的一个[不动点](https://en.wikipedia.org/wiki/Fixed-point_combinator),什么是不动点呢？就是一个点（广义上的）在一个函数的映射下,函数的值仍然为这个点: f(x) = x 。所以，思路就是找到不动点，如果找到了不动点，就可以把“伪递归”函数P转化为真正的递归函数了。
+我们发现了函数P的一个[不动点](https://en.wikipedia.org/wiki/Fixed-point_combinator),什么是不动点呢？就是一个点（广义上的）在一个函数的映射下,函数的值仍然为这个点: f(x) = x 。所以，思路就是找到不动点，如果找到了不动点，就可以把“伪递归”函数P转化为真正的递归函数了。
 
 
 （ To be continue, 时间不够）
