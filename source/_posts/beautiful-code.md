@@ -176,7 +176,7 @@ public class ClearData implements IJob {
 
 方法就是，把这些大量的循环或嵌套抽象成语义更明确的函数或方法把它提取出去调用，过多的嵌套就说明函数代码块的实现太复杂了，也表现了实现者的思路不清晰，当然也可能最终是公司加班赶项目进度的原因造成这样的结果。:)
 
-<font color="red">注意一点</font>，不要为了<font color="red">避免嵌套</font>在循环中用break，continue 投机取巧（这里其实是暗指一些看似谦虚其实自以为是的工程师），好吧，即使这样的写法带来一定程度的避免过多嵌套，但是同时它也带来了更多的坏处，具体情况王垠的文章[《编程的智慧》](http://www.yinwang.org/blog-cn/2015/11/21/programming-philosophy)有讨论。我还可以举出一些讨论:
+<font color="red">注意一点</font>，不要为了<font color="red">避免嵌套</font>在循环中用break，continue 投机取巧，好吧，即使这样的写法带来一定程度的避免过多嵌套，但是同时它也带来了更多的坏处，具体情况王垠的文章[《编程的智慧》](http://www.yinwang.org/blog-cn/2015/11/21/programming-philosophy)有讨论。我还可以举出一些讨论:
 
 - [Are `break` and `continue` bad programming practices?](http://programmers.stackexchange.com/questions/58237/are-break-and-continue-bad-programming-practices)
 

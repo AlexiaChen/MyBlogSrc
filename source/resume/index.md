@@ -9,10 +9,9 @@ title: resume
  - **本科**/大连民族大学/计算机科学与技术系/2010.7至2014.7
  - **工作年限**: 3年/ 2013-07 至 2016.09
  - **豆瓣主页**：https://www.douban.com/people/foo_hack/
- - **技术博客**：http://www.cnblogs.com/foohack/
+ - **个人技术博客**：http://mathxh-love.org/blog http://www.cnblogs.com/foohack/
  - **GitHub**: https://github.com/AlexiaChen （上面有一些个人的大学时代的作品和个人业余项目）
  - **Linkedin**: https://www.linkedin.com/in/mathxhchen
- - **个人博客**: http://mathxh-love.org/blog
 
 # 联系方式
 ***
@@ -42,7 +41,7 @@ title: resume
 - **行业**：计算机软件
 - **职位**：数据处理基础平台研发工程师
 - **部门**：研发部
-- **岗位职责**：为中国气象局研发气象数据处理基础平台软件，为气象局其他部门提供基础服务
+- **岗位职责**：为中国气象科学研究院研发气象数据处理基础平台软件，为气象局其他部门提供基础服务
 
 ### Nwfd/Lwfd项目
 **项目描述**：Nwfd系统是为中国国家气象局（国家级）研发的基础数据处理平台，Lwfd系统是为国家各省（省级）部署配套的数据处理分发平台，与Nwfd系统配合对接完成气象预报数据的分发，
@@ -108,12 +107,11 @@ title: resume
 ### V6项目
 **项目描述**：V6是参照TI公司自己订制的板子，软件，硬件开发（FPGA）都有涉及。软件层面编写SDK与V6板子通信。最终提供给客户进行二次开发。
 
-- 把V6项目的软件模块Vsiual Studio工程替换为Cmake，用Cmake进行项目的 跨平台构建和编译打包。
+- 把V6项目的软件模块Vsiual Studio工程替换为Cmake，用Cmake进行项目的 跨平台构建和编译打包，把windows环境下的V6软件模块移植到CentOS环境下
 - 使用win32 SDK为V6编写windows环境下的驱动安装模块和卸载模块
 - 在windows环境下使用NSIS为V6的软件模块编写打包压缩成正规软件安装程序
 - 在Linux环境（CentOS）下使用rpm打包V6的软件模块
 - 使用ImageMagick图像处理库进行16位灰度图的提取
-- 把windows环境下的V6软件模块移植到CentOS环境下
 - 编写V6项目软件的UI界面，使用Qt开发
 
 ### 3D打印机项目
