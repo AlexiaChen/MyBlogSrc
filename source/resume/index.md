@@ -10,7 +10,7 @@ title: resume
  - **工作年限**: 3年/ 2013-07 至 2016.09
  - **豆瓣主页**：https://www.douban.com/people/foo_hack/
  - **技术博客**：http://www.cnblogs.com/foohack/
- - **GitHub**: https://github.com/AlexiaChen （上面有一些个人的大学作品和个人业余项目）
+ - **GitHub**: https://github.com/AlexiaChen （上面有一些个人的大学时代的作品和个人业余项目）
  - **Linkedin**: https://www.linkedin.com/in/mathxhchen
  - **个人博客**: http://mathxh-love.org/blog
 
@@ -23,18 +23,17 @@ title: resume
 # 自我描述及评价
 ***
 - 对于新技术保持好奇与激情，对新技术有较好的学习研究能力及解决问题的能力
-- 经常参与开源社区。对英文网络资源轻车熟路，熟练阅读相关技术英文文档，满足基本的英文书写能力
-- 熟悉C/C++以及STL，并且熟悉C++ UI框架Qt。以及C++的准标准库Boost，使用过Boost.asio模块，以及boost的RAII
-- 了解Python，用Python完成过简单的脚本自动化任务
-- 使用过java以及java相关的工具链/生态链，框架或库包括SpringMVC，Apache Commons, EhCache,MyBatis，Quartz，log4j，Dom4j，Gson等。编译构建工具包括Maven，Tomcat，Eclispe等
-- 熟练使用SVN，Git版本控制工具
-- 熟悉Linux基本命令，有跨平台项目研发经验
-- 熟悉关系数据库，熟悉SQL，使用过SQLite，MySQL。使用过的NoSQL数据库有Memcached，Redis，Cassandra
-- 了解消息中间件，使用过ActiveMQ
+- 经常参与Github开源社区。对英文网络资源轻车熟路，熟练阅读相关技术英文文档，满足基本的英文书写能力，经常给开源社区提交文档补丁
+- 熟悉C/C++以及STL，并且熟悉C++ UI框架Qt。以及C++的准标准库Boost，使用过Boost.asio模块开发过网络设备通信协议
+- 了解Python，用Python完成过简单的脚本自动化任务，用Python实现过PCM包序列的检测校验程序
+- 熟悉java以及java相关的工具链/生态链，以及java服务端编程，框架或库包括SpringMVC，Apache Commons, EhCache,MyBatis，Quartz，log4j，Dom4j，Gson等。编译构建工具包括Maven，Tomcat，Eclispe等。服务器消息中间件ActiveMQ。
+- 熟练使用SVN，Git等项目版本控制工具
+- 熟悉Linux基本命令及操作，有跨平台项目研发移植经验，用Cmake跨平台构建工具在多系统上进行构建编译。
+- 熟悉关系数据库，熟悉SQL，使用过SQLite，MySQL。使用过的NoSQL数据库有Memcached，Redis，了解Cassandra
 - 熟悉Html/CSS，Javascript。使用过Bootstrap框架，jQuery库，Highchart图表库开发过前端页面，了解RESTful API设计
-- 熟悉TCP/IP协议族，Http，Ftp协议
-- 熟悉windows操作系统基本原理以及win32 SDK，了解Windows内核，有半年windows内核驱动开发经验
-- 了解x86汇编语言，基本能看懂编译器的反汇编
+- 熟悉TCP/IP协议族，Http，Ftp，STMP协议，大学期间写过基于SMTP协议的邮件发送客户端
+- 熟悉windows操作系统基本原理以及SDK，了解Windows内核，有半年windows内核驱动开发实习经验，大学期间写过键盘过滤驱动
+- 了解80x86汇编语言，基本能看懂编译器生成x86汇编语言，大学期间逆向分析过普通U盘病毒样本，工作期间也用汇编语言分析解决过程序的数据类型截断BUG等
 
 # 工作经历
 ***
@@ -74,7 +73,7 @@ title: resume
 - **行业**：航空航天
 - **职位**：C/C++ 软件研发工程师
 - **部门**： 研发部
-- **岗位职责**： 研发航空航天相关设备的配套软件
+- **岗位职责**： 研发航空航天领域相关设备的配套软件
 
 ### BSDP项目
 **项目描述**：BSDP项目是为Cortex系列的遥测设备编写的数据处理软件。
