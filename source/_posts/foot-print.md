@@ -50,6 +50,7 @@ tags:
 ![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f6c1pqnc45j218g0tj13s.jpg "达里诺尔湖的日落1")
 ![](http://ww1.sinaimg.cn/large/a1ac93f3gw1f6c1tloilzj218g0tj47f.jpg "达里诺尔湖的日落2")
 
+***
 
 # 第四站： 下江南
 ### 时间：2014年9月8日 （中秋节）
@@ -74,6 +75,23 @@ tags:
 
 ![](http://ww4.sinaimg.cn/large/a1ac93f3gw1f74vy91gs3j218g0tjh87.jpg "周庄")
 
+***
 
+# 第五站： 一路向西
+### 时间：2014年10月1日 
+
+终于到毕业以后属于自己的一个国庆假日，早就做好了出去远行的打算，考虑国庆节出去旅行到处都是游客，所以就没有到国内有名人多的景点，于是乎就去大西边，不是很西 :P 。 西北一点，主要是青海，甘肃，内蒙古西部一带地区，地广人稀，更方便我拍照。
+
+首先第一站肯定目标是西宁，是坐大巴车去的，你没看错，就是坐大巴！！！从帝都到西宁，远死了！我们一路往返都是这一辆大巴，当时觉得走这种西部路线还是坐大巴爽，周边的风景会更美，当然这不假。不过我的腿真心是被折腾的够够的了 T_T。 
+
+离西宁近的景点也就是青海湖和塔尔寺，大清早起床就坐车出发青海湖 :)
+
+![](http://ww1.sinaimg.cn/large/a1ac93f3gw1f8agevz0tnj218g0oze26.jpg "去青海湖的路上")
+![](http://ww2.sinaimg.cn/large/a1ac93f3gw1f8ageyuhgxj218g0oz4oh.jpg "路上长长的柏油马路，还有牦牛")
+
+![](http://ww1.sinaimg.cn/large/a1ac93f3gw1f8agf1x1sgj218g0oz7wh.jpg "青海湖景区")
+![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f8agf4dqr9j218g0ozaz0.jpg "除了海，我第一次见到这么大的内陆湖泊")
+
+之后，就去了塔尔寺，我不感兴趣，所以就没有进去，在旁边的一家地摊上吃了[酿皮](http://baike.baidu.com/link?url=3fQUi6D-eJMJPLdz9H74L-eDAt29gaKMjOELaIMRivfMT3na8gz4W_quLahG7SgAeJRjX0QvJ3quKtNdp6UiNOMfl8mWLoz4_v6Ftb2X5Um)，是用青稞做的，很好吃，是西北地区的特色风味之一。其实这东西跟我老家的一种叫“凉粉”的东西很像，只是材料不同而已。
 
 
