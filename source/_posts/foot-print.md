@@ -47,8 +47,8 @@ tags:
 ![](http://ww1.sinaimg.cn/large/a1ac93f3gw1f6c1ryb0j8j218g0tjncp.jpg "曼陀山的草")
 ![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f6c1ukce0ij20tj18gamj.jpg "曼陀山上的风车")
 ![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f6c1w404u1j218g0tjtmn.jpg "湖边的栈道")
-![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f6c1pqnc45j218g0tj13s.jpg "达里诺尔湖的日落1")
-![](http://ww1.sinaimg.cn/large/a1ac93f3gw1f6c1tloilzj218g0tj47f.jpg "达里诺尔湖的日落2")
+![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f6c1pqnc45j218g0tj13s.jpg "达里诺尔湖的日落")
+![](http://ww1.sinaimg.cn/large/a1ac93f3gw1f6c1tloilzj218g0tj47f.jpg "日落余晖与水草，看到这，就想起倚天屠龙记的第一章标题<天涯思君不可忘>")
 
 ***
 
@@ -93,5 +93,22 @@ tags:
 ![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f8agf4dqr9j218g0ozaz0.jpg "除了海，我第一次见到这么大的内陆湖泊")
 
 之后，就去了塔尔寺，我不感兴趣，所以就没有进去，在旁边的一家地摊上吃了[酿皮](http://baike.baidu.com/link?url=3fQUi6D-eJMJPLdz9H74L-eDAt29gaKMjOELaIMRivfMT3na8gz4W_quLahG7SgAeJRjX0QvJ3quKtNdp6UiNOMfl8mWLoz4_v6Ftb2X5Um)，是用青稞做的，很好吃，是西北地区的特色风味之一。其实这东西跟我老家的一种叫“凉粉”的东西很像，只是材料不同而已。
+
+第二站就是从西宁北上了，甘肃的张掖，是去那里看丹霞地貌。不过由于天气原因，好冷，没拍出什么能看得过去的照片。
+
+![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f8ahfy1mwpj218g0oz4ld.jpg "张掖丹霞，有点像火焰山似的")
+![](http://ww1.sinaimg.cn/large/a1ac93f3gw1f8ahfx8blxj218g0oztu0.jpg "丹霞公园比较大，所以里面都需要做摆渡车")
+
+第三站，敦煌地区的莫高窟和月牙泉，鸣沙山来啦！！！
+
+![](http://ww2.sinaimg.cn/large/a1ac93f3gw1f8ahr7ulc5j218g0oz7nj.jpg "鸣沙山，这条沙线太美")
+![](http://ww4.sinaimg.cn/large/a1ac93f3gw1f8ahr6tzbnj218g0oz1bj.jpg "这沙漠比之前去的库布其沙漠大得多")
+
+![](http://ww2.sinaimg.cn/large/a1ac93f3gw1f8ahr8pg5tj218g0ozhco.jpg "月牙泉与鸣沙山孤寂守护了丝绸之路上千年")
+![](http://ww4.sinaimg.cn/large/a1ac93f3gw1f8ahravl6lj218g0oze81.jpg "莫高窟")
+
+莫高窟里面的壁画真是美轮美奂，集艺术的大成。这里讲个故事，小时候我们看的《九色鹿》其实就是根据莫高窟的壁画改编的。
+
+
 
 
