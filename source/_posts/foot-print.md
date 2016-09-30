@@ -109,6 +109,24 @@ tags:
 
 莫高窟里面的壁画真是美轮美奂，集艺术的大成。这里讲个故事，小时候我们看的《九色鹿》其实就是根据莫高窟的壁画改编的。
 
+第西站，就是玩内蒙古西部地区额济纳旗，有很多景点从西夏古国城池黑水城遗址到胡杨林，都是绝美的风景。
 
+
+
+![](http://ww2.sinaimg.cn/large/a1ac93f3gw1f8bhot61rqj218g0oz7ss.jpg "行役尚未已，日暮居延城。这里就是居延海")
+![](http://ww1.sinaimg.cn/large/a1ac93f3gw1f8bhou6wqrj218g0oz4qp.jpg "岂伊车辙间，曾有千军行。")
+
+之后是黑水城遗址，只能见到几个城墙角落了。
+
+![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f8bhovcdsej218g0oz1dv.jpg "只能见到残垣断壁")
+
+![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f8bhovpdv0j218g0oz4kb.jpg "黑水城深处戈壁大漠之间，周边一片荒凉，不知道曾经如何的繁华")
+
+![](http://ww4.sinaimg.cn/large/a1ac93f3gw1f8bhp5z10yj20hs0qo406.jpg "黑水城旁边我的日落剪影")
+
+然后是黑水城旁边的怪树林，都是老死的胡杨树，经过千百年估计才形成的。游览怪树林的时候，正好天也黑了，看了次日落，虽然日落看了无数次了。
+
+![](http://ww2.sinaimg.cn/large/a1ac93f3gw1f8bhox193cj218g0ozkbn.jpg "怪树林")
+![](http://ww3.sinaimg.cn/large/a1ac93f3gw1f8bhow4ou1j218g0oz4h2.jpg "怪树林的日落")
 
 
