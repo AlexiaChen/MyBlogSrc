@@ -1,11 +1,11 @@
 
 #blog 自动化备份更新部署
 
-blogTargetFiles="$HOME/Desktop/myblog/blog/*"
-blogTarget="$HOME/Desktop/myblog/blog"
-blogHome="$HOME/Desktop/myblog"
-blogSrc="$HOME/Desktop/blogsrc"
-blogSrcGen="$HOME/Desktop/blogsrc/public/*"
+blogTargetFiles="$HOME/Desktop/buildblog/blog/blog/*"
+blogTarget="$HOME/Desktop/buildblog/blog/blog"
+blogHome="$HOME/Desktop/buildblog/blog/"
+blogSrc="$HOME/Desktop/buildblog/src"
+blogSrcGen="$HOME/Desktop/buildblog/src/public/*"
 
 cd $blogSrc
 
