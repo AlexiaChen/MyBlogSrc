@@ -1,2 +1,0 @@
-# MyBlogSrc
-MyBlog Sources
