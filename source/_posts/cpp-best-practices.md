@@ -274,6 +274,54 @@ private:
 
 这个，我对于C++的模版元编程不熟悉，就不做过多讨论了。模版可以说是另外一种语言，另一种“函数式”语言。它是图灵完备(Turing-Complete)的。
 
+``` cpp
+// check specific class if it has foo() function
+template <typename Ty>
+class has_foo_function {
+
+private:
+	typedef char yes[1];
+	typedef char no[2];
+	
+	template <typename Inner>
+	static yes& test(Inner *I, decltype(I->foo()) * = nullptr);
+	
+	template <typename>
+	static no& test(...);
+	
+public:
+	static const bool value =
+		sizeof(test<Ty>(nullptr)) == sizeof(yes);
+};
+
+class MyTest1
+{
+public:
+	void foo(){};
+	
+};
+
+class MyTest2
+{
+public:
+	
+};
+
+class MyTest3
+{
+public:
+	int foo(int s){ return s; }
+};
+
+int main()
+{
+  std::cout << has_foo_function<MyTest1>::value << std::endl; // 1
+	std::cout << has_foo_function<MyTest2>::value << std::endl; // 0
+	std::cout << has_foo_function<MyTest3>::value << std::endl; // 0
+  return 0;
+}
+```
+
 感兴趣可以在网络上看到各种玩法：
 - [玩模板元编程走火入魔是一种怎样的体验](https://www.zhihu.com/question/46612915)
 - [C++ 模板元编程的应用有哪些，意义是什么](https://www.zhihu.com/question/21656266)
