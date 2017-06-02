@@ -12,6 +12,7 @@ tags:
 这个tokenzier设计原理很简单，它根据文件按照行扫描的方式，逐行读取和解析，然后根据解析出来的token作分类，大致有String类，Identifier类，还有Number类，没有做更详细的细分，因为之后这个Stone语言的解释器会逐步完善添加功能，所以我把每个token都与它所在的行号做了关联，以后会有用处，类似于下面:
 
 ``` cpp
+
 class Token
 {
 public:
@@ -29,7 +30,10 @@ public:
 private:
     int32_t m_line_number;
 };
+
 ```
 上面是Token的抽象类，如果需要自己实现特定的Token类，就子类化Token就可以了。
 
 该词法分析器依赖于C++ 11的正则表达式库。我的想法也是尽量使用C++ 11/14的特性来完成一些功能。就这样吧，还有很多要做，以后还要加入语言的闭包等等，挑战不小。
+
+这里是该项目的[Github地址](https://github.com/AlexiaChen/stone-lang-in-cpp)。

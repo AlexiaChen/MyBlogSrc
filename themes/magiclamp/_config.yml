@@ -80,28 +80,12 @@ auto_excerpt:
 # Note: this option is avialable only when the language is not `zh-Hans`
 use_font_lato: true
 
-# Make duoshuo show UA
-# user_id must NOT be null when admin_enable is true!
-# you can visit http://dev.duoshuo.com get duoshuo user id.
-duoshuo_info: # give up duoshuo
-  ua_enable: true
-  admin_enable: true
-  user_id: 2405394
-  admin_nickname: MathxH
-
-
-
-duoshuo_shortname: mathxh
 
 
 # share server
 # JiaThis share
 jiathis: false
 
-# duoshuo share
-duoshuo_share: true # give up duoshuo
-# duoshuo hot artical
-duoshuo_hotartical: true # give up duoshuo
 
 # baidu share
 baidu_share: true

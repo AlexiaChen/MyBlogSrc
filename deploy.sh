@@ -4,8 +4,8 @@
 blogTargetFiles="$HOME/Desktop/buildblog/blog/blog/*"
 blogTarget="$HOME/Desktop/buildblog/blog/blog"
 blogHome="$HOME/Desktop/buildblog/blog/"
-blogSrc="$HOME/Desktop/buildblog/src_tsts"
-blogSrcGen="$HOME/Desktop/buildblog/src_tsts/public/*"
+blogSrc="$HOME/Desktop/buildblog/src"
+blogSrcGen="$HOME/Desktop/buildblog/src/public/*"
 
 cd $blogSrc
 
