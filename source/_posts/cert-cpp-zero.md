@@ -140,10 +140,12 @@ unsigned int operator"" _x(const char *, std::size_t);
 ``` cpp
 //bad
 #include <cstddef> // std::for size_t
+
 static const std::size_t _max_limit = 1024;
 std::size_t _limit = 100;
+
 unsigned int get_value(unsigned int count) {
-return count < _limit ? count : _limit;
+  return count < _limit ? count : _limit;
 }
 
 ```
@@ -151,10 +153,12 @@ return count < _limit ? count : _limit;
 ``` cpp
 //good
 #include <cstddef> // for size_t
+
 static const std::size_t max_limit = 1024;
 std::size_t limit = 100;
+
 unsigned int get_value(unsigned int count) {
-return count < limit ? count : limit;
+  return count < limit ? count : limit;
 }
 ```
 
@@ -162,10 +166,11 @@ return count < limit ? count : limit;
 ``` cpp
 //bad
 #include <cinttypes> // for int_fast16_t
+
 void f(std::int_fast16_t val) {
-enum { MAX_SIZE = 80 };
+  enum { MAX_SIZE = 80 };
 // ...
-}
+  }
 }
 
 ```
@@ -173,10 +178,11 @@ enum { MAX_SIZE = 80 };
 ``` cpp
 //good
 #include <cinttypes> // for std::int_fast16_t
+
 void f(std::int_fast16_t val) {
-enum { BufferSize = 80 };
-// ...
-}
+  enum { BufferSize = 80 };
+  // ...
+  }
 }
 
 ```
@@ -207,11 +213,12 @@ std::cout << c << std::endl;
 ``` cpp
 //good
 #include <iostream>
-void f(char c) {
-const char &p = c;
-p = 'p'; //产生期望结果，编译错误，及时发现
-std::cout << c << std::endl;
 
+void f(char c) {
+  const char &p = c;
+  p = 'p'; //产生期望结果，编译错误，及时发现
+  std::cout << c << std::endl;
+}
 ```
 
 
@@ -227,9 +234,10 @@ std::cout << c << std::endl;
 #include <mutex>
 static std::mutex m;
 static int shared_resource;
+
 void increment_by_42() {
-std::unique_lock<std::mutex>(m);
-shared_resource += 42;
+  std::unique_lock<std::mutex>(m);
+  shared_resource += 42;
 }
 
 ```
@@ -245,20 +253,23 @@ shared_resource += 42;
 #include <mutex>
 static std::mutex m;
 static int shared_resource;
+
 void increment_by_42() {
-std::unique_lock<std::mutex> lock(m); //一定要加上对象名字
-shared_resource += 42;
+  std::unique_lock<std::mutex> lock(m); //一定要加上对象名字
+  shared_resource += 42;
 }
 ```
 
 #### 代码样例对比
 ``` cpp
 #include <iostream>
+
 struct Widget {
-Widget() { std::cout << "Constructed" << std::endl; }
+  Widget() { std::cout << "Constructed" << std::endl; }
 };
+
 void f() {
-Widget w(); // 有歧义
+  Widget w(); // 有歧义
 }
 
 ```
@@ -284,18 +295,19 @@ Widget w2{}; // Use direct initialization
 ``` cpp
 
 #include <iostream>
+
 struct Widget {
-explicit Widget(int i) { std::cout << "Widget constructed" <<
-std::endl; }
+  explicit Widget(int i) { std::cout << "Widget constructed" << std::endl; }
 };
+
 struct Gadget {
-explicit Gadget(Widget wid) { std::cout << "Gadget constructed"
-<< std::endl; }
+  explicit Gadget(Widget wid) { std::cout << "Gadget constructed" << std::endl; }
 };
+
 void f() {
-int i = 3;
-Gadget g(Widget(i));// 该声明有歧义
-std::cout << i << std::endl;
+  int i = 3;
+  Gadget g(Widget(i));// 该声明有歧义
+  std::cout << i << std::endl;
 }
 ```
 以上的声明有歧义，不会被解释为一个Gadget类型的对象g，而是被解释成函数g，返回类型为Gadget。
@@ -303,21 +315,24 @@ std::cout << i << std::endl;
 ``` cpp
 
 #include <iostream>
+
 struct Widget {
-explicit Widget(int i) {
-std::cout << "Widget constructed" << std::endl;
-}
+  explicit Widget(int i) {
+    std::cout << "Widget constructed" << std::endl;
+  }
 };
+
 struct Gadget {
-explicit Gadget(Widget wid) {
-std::cout << "Gadget constructed" << std::endl;
-}
+  explicit Gadget(Widget wid) {
+    std::cout << "Gadget constructed" << std::endl;
+  }
 };
+
 void f() {
-int i = 3;
-Gadget g1((Widget(i))); // Use extra parentheses
-Gadget g2{Widget(i)}; // Use direct initialization
-std::cout << i << std::endl;
+  int i = 3;
+  Gadget g1((Widget(i))); // Use extra parentheses
+  Gadget g2{Widget(i)}; // Use direct initialization
+  std::cout << i << std::endl;
 }
 
 ```
@@ -343,13 +358,14 @@ Gadget constructed
 
 #include <Windows.h>
 #include <new>
+
 void *operator new(std::size_t size) noexcept(false) {
-// Private, expandable heap.
-static HANDLE h = ::HeapCreate(0, 0, 0);
-if (h) {
-return ::HeapAlloc(h, 0, size);
-}
-throw std::bad_alloc();
+  // Private, expandable heap.
+  static HANDLE h = ::HeapCreate(0, 0, 0);
+  if (h) {
+    return ::HeapAlloc(h, 0, size);
+  }
+  throw std::bad_alloc();
 }
 // No corresponding global delete operator defined.
 ``` 
@@ -360,68 +376,79 @@ throw std::bad_alloc();
 
 #include <Windows.h>
 #include <new>
+
 class HeapAllocator {
-static HANDLE h;
-static bool init;
+  static HANDLE h;
+  static bool init;
 public:
-static void *alloc(std::size_t size) noexcept(false) {
-if (!init) {
-h = ::HeapCreate(0, 0, 0); // Private, expandable heap.
-init = true;
-}
-if (h) {
-return ::HeapAlloc(h, 0, size);
-}
-throw std::bad_alloc();
-}
-static void dealloc(void *ptr) noexcept {
-if (h) {
-(void)::HeapFree(h, 0, ptr);
-}
-}
+  static void *alloc(std::size_t size) noexcept(false) {
+    if (!init) {
+      h = ::HeapCreate(0, 0, 0); // Private, expandable heap.
+      init = true;
+    }
+
+    if (h) {
+      return ::HeapAlloc(h, 0, size);
+    }
+      throw std::bad_alloc();
+  }
+
+  static void dealloc(void *ptr) noexcept {
+    if (h) {
+      (void)::HeapFree(h, 0, ptr);
+    }
+  }
 };
+
 HANDLE HeapAllocator::h = nullptr;
 bool HeapAllocator::init = false;
+
 void *operator new(std::size_t size) noexcept(false) {
-return HeapAllocator::alloc(size);
+  return HeapAllocator::alloc(size);
 }
+
 void operator delete(void *ptr) noexcept {
-return HeapAllocator::dealloc(ptr);
+  return HeapAllocator::dealloc(ptr);
 }
 ```
+
 
 #### 代码样例对比
 
 ``` cpp
 #include <new>
+
 extern "C++" void update_bookkeeping(void *allocated_ptr,
 std::size_t size, bool alloc);
+
 struct S {
-void *operator new(std::size_t size) noexcept(false) {
-void *ptr = ::operator new(size);
-update_bookkeeping(ptr, size, true);
-return ptr;
-}
+  void *operator new(std::size_t size) noexcept(false) {
+    void *ptr = ::operator new(size);
+    update_bookkeeping(ptr, size, true);
+    return ptr;
+  }
 };
 ```
-
 以上代码，operator new() 实在类作用域重载的，但是却没有与之匹配的在类作用域重载的delete，所以当然分配好的类S的对象，需要删除的时候，调用的是全局默认的delete函数，这样就会导致程序处于一个未确定状态（未定义行为）。
 
 ``` cpp
 #include <new>
+
 extern "C++" void update_bookkeeping(void *allocated_ptr,
 std::size_t size, bool alloc);
+
 struct S {
-void *operator new(std::size_t size) noexcept(false) {
-void *ptr = ::operator new(size);
-update_bookkeeping(ptr, size, true);
-return ptr;
-}
-//需要一个与之匹配的delete
-void operator delete(void *ptr, std::size_t size) noexcept {
-::operator delete(ptr);
-update_bookkeeping(ptr, size, false);
-}
+  void *operator new(std::size_t size) noexcept(false) {
+    void *ptr = ::operator new(size);
+    update_bookkeeping(ptr, size, true);
+    return ptr;
+  }
+  
+  //需要一个与之匹配的delete
+  void operator delete(void *ptr, std::size_t size) noexcept {
+    ::operator delete(ptr);
+    update_bookkeeping(ptr, size, false);
+  }
 };
 ```
 
@@ -450,16 +477,19 @@ unit.
 ``` cpp
 //bad
 #include <cstddef>
+
 struct test {
-int a;
-char b;
-int c;
+  int a;
+  char b;
+  int c;
 };
+
 // Safely copy bytes to user space
 extern int copy_to_user(void *dest, void *src, std::size_t size);
+
 void do_stuff(void *usr_buf) {
-test arg{1, 2, 3};
-copy_to_user(usr_buf, &arg, sizeof(arg));
+  test arg{1, 2, 3};
+  copy_to_user(usr_buf, &arg, sizeof(arg));
 }
 ```
 
@@ -468,19 +498,22 @@ copy_to_user(usr_buf, &arg, sizeof(arg));
 ``` cpp
 
 #include <cstddef>
+
 struct test {
-int a;
-char b;
-int c;
+  int a;
+  char b;
+  int c;
 };
+
 // Safely copy bytes to user space
 extern int copy_to_user(void *dest, void *src, std::size_t size);
+
 void do_stuff(void *usr_buf) {
-test arg{};
-arg.a = 1;
-arg.b = 2; // 关键在这里
-arg.c = 3;
-copy_to_user(usr_buf, &arg, sizeof(arg));
+  test arg{};
+  arg.a = 1;
+  arg.b = 2; // 关键在这里
+  arg.c = 3;
+  copy_to_user(usr_buf, &arg, sizeof(arg));
 }
 
 ```
@@ -492,25 +525,28 @@ copy_to_user(usr_buf, &arg, sizeof(arg));
 ``` cpp
 #include <cstddef>
 #include <cstring>
+
 struct test {
-int a;
-char b;
-int c;
+  int a;
+  char b;
+  int c;
 };
+
 // Safely copy bytes to user space.
 extern int copy_to_user(void *dest, void *src, std::size_t size);
+
 void do_stuff(void *usr_buf) {
-test arg{1, 2, 3};
-// May be larger than strictly needed.
-unsigned char buf[sizeof(arg)];
-std::size_t offset = 0;
-std::memcpy(buf + offset, &arg.a, sizeof(arg.a));
-offset += sizeof(arg.a);
-std::memcpy(buf + offset, &arg.b, sizeof(arg.b));
-offset += sizeof(arg.b);
-std::memcpy(buf + offset, &arg.c, sizeof(arg.c));
-offset += sizeof(arg.c);
-copy_to_user(usr_buf, buf, offset /* size of info copied */);
+  test arg{1, 2, 3};
+  // May be larger than strictly needed.
+  unsigned char buf[sizeof(arg)];
+  std::size_t offset = 0;
+  std::memcpy(buf + offset, &arg.a, sizeof(arg.a));
+  offset += sizeof(arg.a);
+  std::memcpy(buf + offset, &arg.b, sizeof(arg.b));
+  offset += sizeof(arg.b);
+  std::memcpy(buf + offset, &arg.c, sizeof(arg.c));
+  offset += sizeof(arg.c);
+  copy_to_user(usr_buf, buf, offset /* size of info copied */);
 }
 ```
 
@@ -518,26 +554,31 @@ copy_to_user(usr_buf, buf, offset /* size of info copied */);
 
 ``` cpp
 #include <cstddef>
+
 struct test {
-int a;
-char b;
-char padding_1, padding_2, padding_3;
-int c;
-test(int a, char b, int c) : a(a), b(b),
-padding_1(0), padding_2(0), padding_3(0),
-c(c) {}
+  int a;
+  char b;
+  char padding_1, padding_2, padding_3;
+  int c;
+  test(int a, char b, int c) : a(a), b(b),
+  padding_1(0), padding_2(0), padding_3(0),
+  c(c) {}
 };
+
 // Ensure c is the next byte after the last padding byte.
 static_assert(offsetof(test, c) == offsetof(test, padding_3) + 1,
 "Object contains intermediate padding");
+
 // Ensure there is no trailing padding.
 static_assert(sizeof(test) == offsetof(test, c) + sizeof(int),
 "Object contains trailing padding");
+
 // Safely copy bytes to user space.
 extern int copy_to_user(void *dest, void *src, std::size_t size);
+
 void do_stuff(void *usr_buf) {
-test arg{1, 2, 3};
-copy_to_user(usr_buf, &arg, sizeof(arg));
+  test arg{1, 2, 3};
+  copy_to_user(usr_buf, &arg, sizeof(arg));
 }
 ```
 
@@ -550,29 +591,30 @@ copy_to_user(usr_buf, &arg, sizeof(arg));
 #include <cstddef>
 class base {
 public:
-virtual ~base() = default;
+  virtual ~base() = default;
 };
+
 class test : public virtual base {
-alignas(32) double h;
-char i;
-unsigned j : 80;
+  alignas(32) double h;
+  char i;
+  unsigned j : 80;
 protected:
-unsigned k;
-unsigned l : 4;
-unsigned short m : 3;
+  unsigned k;
+  unsigned l : 4;
+  unsigned short m : 3;
 public:
-char n;
-double o;
-test(double h, char i, unsigned j, unsigned k, unsigned l,
-unsigned short m, char n, double o) :
-h(h), i(i), j(j), k(k), l(l), m(m), n(n), o(o) {}
-virtual void foo();
+  char n;
+  double o;
+  test(double h, char i, unsigned j, unsigned k, unsigned l,unsigned short m, char n, double o) :h(h), i(i), j(j), k(k), l(l), m(m), n(n), o(o) {}
+  virtual void foo();
 };
+
 // Safely copy bytes to user space.
 extern int copy_to_user(void *dest, void *src, std::size_t size);
+
 void do_stuff(void *usr_buf) {
-test arg{0.0, 1, 2, 3, 4, 5, 6, 7.0};
-copy_to_user(usr_buf, &arg, sizeof(arg));
+  test arg{0.0, 1, 2, 3, 4, 5, 6, 7.0};
+  copy_to_user(usr_buf, &arg, sizeof(arg));
 }
 ```
 
@@ -589,68 +631,70 @@ copy_to_user(usr_buf, &arg, sizeof(arg));
 ``` cpp
 #include <cstddef>
 #include <cstring>
+
 class base {
 public:
-virtual ~base() = default;
+  virtual ~base() = default;
 };
+
 class test : public virtual base {
-alignas(32) double h;
-char i;
-unsigned j : 80;
+  alignas(32) double h;
+  char i;
+  unsigned j : 80;
 protected:
-unsigned k;
-unsigned l : 4;
-unsigned short m : 3;
+  unsigned k;
+  unsigned l : 4;
+  unsigned short m : 3;
 public:
-char n;
-double o;
-test(double h, char i, unsigned j, unsigned k, unsigned l,
-unsigned short m, char n, double o) :
-h(h), i(i), j(j), k(k), l(l), m(m), n(n), o(o) {}
-virtual void foo();
-bool serialize(unsigned char *buffer, std::size_t &size) {
-if (size < sizeof(test)) {
-return false;
-}
-std::size_t offset = 0;
-std::memcpy(buffer + offset, &h, sizeof(h));
-offset += sizeof(h);
-std::memcpy(buffer + offset, &i, sizeof(i));
-offset += sizeof(i);
-// Only sizeof(unsigned) bits are valid, so the following is
-// not narrowing.
-unsigned loc_j = j;
-std::memcpy(buffer + offset, &loc_j, sizeof(loc_j));
-offset += sizeof(loc_j);
-std::memcpy(buffer + offset, &k, sizeof(k));
-offset += sizeof(k);
-unsigned char loc_l = l & 0b1111;
-std::memcpy(buffer + offset, &loc_l, sizeof(loc_l));
-offset += sizeof(loc_l);
-unsigned short loc_m = m & 0b111;
-std::memcpy(buffer + offset, &loc_m, sizeof(loc_m));
-offset += sizeof(loc_m);
-std::memcpy(buffer + offset, &n, sizeof(n));
-offset += sizeof(n);
-std::memcpy(buffer + offset, &o, sizeof(o));
-offset += sizeof(o);
-size -= offset;
-return true;
-}
+  char n;
+  double o;
+  test(double h, char i, unsigned j, unsigned k, unsigned l,unsigned short m, char n, double o) :h(h), i(i), j(j), k(k), l(l), m(m), n(n), o(o) {}
+  virtual void foo();
+  bool serialize(unsigned char *buffer, std::size_t &size) {
+    if (size < sizeof(test)) {
+      return false;
+    }
+    std::size_t offset = 0;
+    std::memcpy(buffer + offset, &h, sizeof(h));
+    offset += sizeof(h);
+    std::memcpy(buffer + offset, &i, sizeof(i));
+    offset += sizeof(i);
+    // Only sizeof(unsigned) bits are valid, so the following is
+    // not narrowing.
+    unsigned loc_j = j;
+    std::memcpy(buffer + offset, &loc_j, sizeof(loc_j));
+    offset += sizeof(loc_j);
+    std::memcpy(buffer + offset, &k, sizeof(k));
+    offset += sizeof(k);
+    unsigned char loc_l = l & 0b1111;
+    std::memcpy(buffer + offset, &loc_l, sizeof(loc_l));
+    offset += sizeof(loc_l);
+    unsigned short loc_m = m & 0b111;
+    std::memcpy(buffer + offset, &loc_m, sizeof(loc_m));
+    offset += sizeof(loc_m);
+    std::memcpy(buffer + offset, &n, sizeof(n));
+    offset += sizeof(n);
+    std::memcpy(buffer + offset, &o, sizeof(o));
+    offset += sizeof(o);
+    size -= offset;
+    return true;
+  }
 };
+
 // Safely copy bytes to user space.
-extern int copy_to_user(void *dest, void *src, size_t size);
-void do_stuff(void *usr_buf) {
-test arg{0.0, 1, 2, 3, 4, 5, 6, 7.0};
-// May be larger than strictly needed, will be updated by
-// calling serialize() to the size of the buffer remaining.
-std::size_t size = sizeof(arg);
-unsigned char buf[sizeof(arg)];
-if (arg.serialize(buf, size)) {
-copy_to_user(usr_buf, buf, sizeof(test) - size);
-} else {
-// Handle error
-}
+  extern int copy_to_user(void *dest, void *src, size_t size);
+
+  void do_stuff(void *usr_buf) {
+    test arg{0.0, 1, 2, 3, 4, 5, 6, 7.0};
+    // May be larger than strictly needed, will be updated by
+    // calling serialize() to the size of the buffer remaining.
+    std::size_t size = sizeof(arg);
+    unsigned char buf[sizeof(arg)];
+    if (arg.serialize(buf, size)) {
+      copy_to_user(usr_buf, buf, sizeof(test) - size);
+    } else {
+      // Handle error
+    }
 }
 ```
 
@@ -668,20 +712,23 @@ copy_to_user(usr_buf, buf, sizeof(test) - size);
 
 ``` cpp
 #include <stdexcept>
+
 int fact(int i) noexcept(false) {
-if (i < 0) {
-// Negative factorials are undefined.
-throw std::domain_error("i must be >= 0");
-}
-static const int cache[] = {
-fact(0), fact(1), fact(2), fact(3), fact(4), fact(5),
-fact(6), fact(7), fact(8), fact(9), fact(10), fact(11),
-fact(12), fact(13), fact(14), fact(15), fact(16)
-};
-if (i < (sizeof(cache) / sizeof(int))) {
-return cache[i];
-}
-return i > 0 ? i * fact(i - 1) : 1;
+  if (i < 0) {
+  // Negative factorials are undefined.
+    throw std::domain_error("i must be >= 0");
+  }
+
+  static const int cache[] = {
+    fact(0), fact(1), fact(2), fact(3), fact(4), fact(5),
+    fact(6), fact(7), fact(8), fact(9), fact(10), fact(11),
+    fact(12), fact(13), fact(14), fact(15), fact(16)
+  };
+
+  if (i < (sizeof(cache) / sizeof(int))) {
+    return cache[i];
+  }
+    return i > 0 ? i * fact(i - 1) : 1;
 }
 ```
 
@@ -693,20 +740,23 @@ return i > 0 ? i * fact(i - 1) : 1;
 
 ``` cpp
 #include <stdexcept>
+
 int fact(int i) noexcept(false) {
-if (i < 0) {
-// Negative factorials are undefined.
-throw std::domain_error("i must be >= 0");
-}
-// Use the lazy-initialized cache.
-static int cache[17];
-if (i < (sizeof(cache) / sizeof(int))) {
-if (0 == cache[i]) {
-cache[i] = i > 0 ? i * fact(i - 1) : 1;
-}
-return cache[i];
-}
-return i > 0 ? i * fact(i - 1) : 1;
+  if (i < 0) {
+    // Negative factorials are undefined.
+    throw std::domain_error("i must be >= 0");
+  }
+
+  // Use the lazy-initialized cache.
+  static int cache[17];
+  
+  if (i < (sizeof(cache) / sizeof(int))) {
+    if (0 == cache[i]) {
+      cache[i] = i > 0 ? i * fact(i - 1) : 1;
+    }
+    return cache[i];
+  }
+  return i > 0 ? i * fact(i - 1) : 1;
 }
 ```
 
@@ -718,24 +768,30 @@ return i > 0 ? i * fact(i - 1) : 1;
 // file.h
 #ifndef FILE_H
 #define FILE_H
+
 class Car {
-int numWheels;
+  int numWheels;
 public:
-Car() : numWheels(4) {}
-explicit Car(int numWheels) : numWheels(numWheels) {}
-int get_num_wheels() const { return numWheels; }
+  Car() : numWheels(4) {}
+  explicit Car(int numWheels) : numWheels(numWheels) {}
+  int get_num_wheels() const { return numWheels; }
 };
 #endif // FILE_H
+
 // file1.cpp
 #include "file.h"
 #include <iostream>
+
 extern Car c;
 int numWheels = c.get_num_wheels();
+
 int main() {
-std::cout << numWheels << std::endl; // 不一定输出6
+  std::cout << numWheels << std::endl; // 不一定输出6
 }
+
 // file2.cpp
 #include "file.h"
+
 Car get_default_car() { return Car(6); }
 Car c = get_default_car();
 ```
@@ -751,25 +807,30 @@ file1.cpp && ./a.out 才会输出所期望的结果6。
 // file.h
 #ifndef FILE_H
 #define FILE_H
+
 class Car {
-int numWheels;
+  int numWheels;
 public:
-Car() : numWheels(4) {}
-explicit Car(int numWheels) : numWheels(numWheels) {}
-int get_num_wheels() const { return numWheels; }
+  Car() : numWheels(4) {}
+  explicit Car(int numWheels) : numWheels(numWheels) {}
+  int get_num_wheels() const { return numWheels; }
 };
 #endif // FILE_H
+
 // file1.cpp
 #include "file.h"
 #include <iostream>
+
 int &get_num_wheels() {
-extern Car c;
-static int numWheels = c.get_num_wheels();
-return numWheels;
+  extern Car c;
+  static int numWheels = c.get_num_wheels();
+  return numWheels;
 }
+
 int main() {
-std::cout << get_num_wheels() << std::endl; //一定是6
+  std::cout << get_num_wheels() << std::endl; //一定是6
 }
+
 // file2.cpp
 #include "file.h"
 Car get_default_car() { return Car(6); }
@@ -791,27 +852,26 @@ Car c = get_default_car();
 
 所以在这些情况下，函数就必须声明为noexcept的，因为从一个函数抛出异常本来就不会有well-defined的行为，C++ 标准[except.spec]有如下声明：
 
-> A deallocation function with no explicit exception-specification is treated as if it were
-specified with noexcept(true).
+> A deallocation function with no explicit exception-specification is treated as if it were specified with noexcept(true).
 
 C++标准中，[class.dtor]部份有以下声明：
 
-> A declaration of a destructor that does not have an exception-specification is implicitly
-considered to have the same exception-specification as an implicit declaration.
+> A declaration of a destructor that does not have an exception-specification is implicitly considered to have the same exception-specification as an implicit declaration.
 
 #### 代码样例对比
 
 ``` cpp
 #include <stdexcept>
+
 class S {
-bool has_error() const;
+  bool has_error() const;
 public:
-~S() noexcept(false) {
-// Normal processing
-if (has_error()) {
-throw std::logic_error("Something bad");
-}
-}
+  ~S() noexcept(false) {
+    // Normal processing
+    if (has_error()) {
+      throw std::logic_error("Something bad");
+    }
+  }
 };
 ```
 
@@ -820,15 +880,16 @@ throw std::logic_error("Something bad");
 ``` cpp
 #include <exception>
 #include <stdexcept>
+
 class S {
-bool has_error() const;
+  bool has_error() const;
 public:
-~S() noexcept(false) {
-// Normal processing
-if (has_error() && !std::uncaught_exception()) {
-throw std::logic_error("Something bad");
-}
-}
+  ~S() noexcept(false) {
+    // Normal processing
+    if (has_error() && !std::uncaught_exception()) {
+      throw std::logic_error("Something bad");
+    }
+  }
 };
 ```
 
@@ -841,7 +902,7 @@ throw std::logic_error("Something bad");
 //something
 // that can be modified by the user.
 class Bad {
-~Bad() noexcept(false);
+  ~Bad() noexcept(false);
 };
 ```
 
@@ -849,10 +910,10 @@ class Bad {
 
 ``` cpp
 class SomeClass {
-Bad bad_member;
+  Bad bad_member;
 public:
-~SomeClass()
-{
+  ~SomeClass()
+  {
     try {
         // ...
     } catch(...) {
@@ -864,8 +925,7 @@ public:
 ```
 但是在C++ 标准中[except.handle]声明如下：
 
-> The currently handled exception is rethrown if control reaches the end of a handler of
-the function-try-block of a constructor or destructor.
+> The currently handled exception is rethrown if control reaches the end of a handler of the function-try-block of a constructor or destructor.
 
 根据标准的说法，也就是在构造函数或析构函数中当控制流抵达catch块尾部的时候，异常还是会被重新抛出。结果还是不可避免的会被抛出异常。
 
@@ -873,10 +933,10 @@ the function-try-block of a constructor or destructor.
 
 ``` cpp
 class SomeClass {
-Bad bad_member;
+  Bad bad_member;
 public:
-~SomeClass()
-{
+  ~SomeClass()
+  {
     try {
         // ...
     } catch(...) {
@@ -888,8 +948,7 @@ public:
         // happening.
         return;
     }
-}
-
+  }
 };
 ```
 
@@ -899,11 +958,13 @@ public:
 
 ``` cpp
 #include <stdexcept>
+
 bool perform_dealloc(void *);
+
 void operator delete(void *ptr) noexcept(false) {
-if (perform_dealloc(ptr)) {
-throw std::logic_error("Something bad");
-}
+  if (perform_dealloc(ptr)) {
+    throw std::logic_error("Something bad");
+  }
 }
 ```
 
@@ -912,13 +973,15 @@ throw std::logic_error("Something bad");
 ``` cpp
 #include <cstdlib>
 #include <stdexcept>
+
 bool perform_dealloc(void *);
 void log_failure(const char *);
+
 void operator delete(void *ptr) noexcept(true) {
-if (perform_dealloc(ptr)) {
-log_failure("Deallocation of pointer failed");
-std::exit(1); // Fail, but still call destructors
-}
+  if (perform_dealloc(ptr)) {
+    log_failure("Deallocation of pointer failed");
+    std::exit(1); // Fail, but still call destructors
+  }
 }
 ```
 上面的代码通过不抛出异常，直接结束程序，而且也会正确调用析构函数。
@@ -929,27 +992,13 @@ std::exit(1); // Fail, but still call destructors
 
 C++ 标准[namespace.std]规定了：
 
-> The behavior of a C++ program is undefined if it adds declarations or definitions to
-namespace std or to a namespace within namespace std unless otherwise
-specified. A program may add a template specialization for any standard library
-template to namespace std only if the declaration depends on a user-defined type
-and the specialization meets the standard library requirements for the original
-template and is not explicitly prohibited.
+> The behavior of a C++ program is undefined if it adds declarations or definitions to namespace std or to a namespace within namespace std unless otherwise specified. A program may add a template specialization for any standard library template to namespace std only if the declaration depends on a user-defined type and the specialization meets the standard library requirements for the original template and is not explicitly prohibited.
 
-> The behavior of a C++ program is undefined if it declares
-an explicit specialization of any member function of a standard library class
-template, or
- an explicit specialization of any member function template of a standard library class
-or class template, or
- an explicit or partial specialization of any member class template of a standard
-library class or class template.
+> The behavior of a C++ program is undefined if it declares an explicit specialization of any member function of a standard library class template, or an explicit specialization of any member function template of a standard library class or class template, or an explicit or partial specialization of any member class template of a standard library class or class template.
 
 除了要限制对std名字空间的扩展，C++标准[namespace.posix]还规定限制对posix名字空间的扩展:
 
-> The behavior of a C++ program is undefined if it adds declarations or definitions to
-namespace posix or to a namespace within namespace posix unless otherwise
-specified. The namespace posix is reserved for use by ISO/IEC 9945 and other POSIX
-standards.
+> The behavior of a C++ program is undefined if it adds declarations or definitions to namespace posix or to a namespace within namespace posix unless otherwise specified. The namespace posix is reserved for use by ISO/IEC 9945 and other POSIX standards.
 
 ### DCL59-CPP 不要在头文件中定义一个未命名的名字空间
 
@@ -958,12 +1007,14 @@ standards.
 C++标准[namespace.unnamed]对此作出描述:
 
 > An unnamed-namespace-definition behaves as if it were replaced by:
-inline namespace unique { /* empty body */ }
-using namespace unique ;
-namespace unique { namespace-body }
-where inline appears if and only if it appears in the unnamed-namespace-definition,
-all occurrences of unique in a translation unit are replaced by the same identifier, and
-this identifier differs from all other identifiers in the entire program.
+
+> inline namespace unique { /* empty body */ }
+
+> using namespace unique ;
+
+> namespace unique { namespace-body }
+
+> where inline appears if and only if it appears in the unnamed-namespace-definition, all occurrences of unique in a translation unit are replaced by the same identifier, and this identifier differs from all other identifiers in the entire program.
 
 因为定义在头文件中的未命名名字空间，可能通过#include 插入到任何.cpp文件中（任何翻译单元），会导致对未命名的名字空间在不同的翻译单元有自己的实例名字，所以可能导致奇怪的结果。
 
@@ -973,36 +1024,24 @@ this identifier differs from all other identifiers in the entire program.
 
 正经的C++项目一般都会把程序分割成多个翻译单元，然后通过链接器把多个翻译单元链接在一起成为一个可执行文件。为了支持这一种模型，C++限制已命名的对象定义，通过在跨所有翻译单元中只有一个定义来保证。这种模型叫one-definition rule(ODR)。 而且也在C++标准 [basic.def.odr] 中描述了：
 
-> Every program shall contain exactly one definition of every non-inline function or variable
-that is odr-used in that program; no diagnostic required. The definition can appear
-explicitly in the program, it can be found in the standard or a user-defined library, or
-(when appropriate) it is implicitly defined. An inline function shall be defined in every
-translation unit in which it is odr-used.
+> Every program shall contain exactly one definition of every non-inline function or variable that is odr-used in that program; no diagnostic required. The definition can appear explicitly in the program, it can be found in the standard or a user-defined library, or (when appropriate) it is implicitly defined. An inline function shall be defined in every translation unit in which it is odr-used.
 
 当然，多个翻译单元通常会包含多种声明，因为大部分是通过#include头文件被插入到翻译单元中的。在头文件中的这些声明也有可能也含有定义了。比如类和函数模板的定义。这些也在C++标准中描述了：
 
-> There can be more than one definition of a class type, enumeration type, inline function
-with external linkage, class template, non-static function template, static data member of
-a class template, member function of a class template, or template specialization for
-which some template parameters are not specified in a program provided that each
-definition appears in a different translation unit, and provided the definitions satisfy the
-following requirements. Given such an entity named D defined in more than one
-translation unit....
-If the definitions of D satisfy all these requirements, then the program shall behave as if
-there were a single definition of D. If the definitions of D do not satisfy these
-requirements, then the behavior is undefined.
+> There can be more than one definition of a class type, enumeration type, inline function with external linkage, class template, non-static function template, static data member of a class template, member function of a class template, or template specialization for which some template parameters are not specified in a program provided that each definition appears in a different translation unit, and provided the definitions satisfy the following requirements. Given such an entity named D defined in more than one translation unit.... If the definitions of D satisfy all these requirements, then the program shall behave as if there were a single definition of D. If the definitions of D do not satisfy these requirements, then the behavior is undefined.
 
 #### 代码样例对比
 
 ``` cpp
 // a.cpp
 struct S {
-int a;
+  int a;
 };
+
 // b.cpp
 class S {
 public:
-int a;
+  int a;
 };
 ```
 
@@ -1013,10 +1052,12 @@ int a;
 ``` cpp
 // S.h
 struct S {
-int a;
+  int a;
 };
+
 // a.cpp
 #include "S.h"
+
 // b.cpp
 #include "S.h"
 ```
@@ -1028,16 +1069,17 @@ int a;
 ``` cpp
 // a.cpp
 namespace {
-struct S {
-int a;
-};
+  struct S {
+    int a;
+  };
 }
+
 // b.cpp
 namespace {
-class S {
-public:
-int a;
-};
+  class S {
+  public:
+    int a;
+  };
 }
 ```
 
@@ -1047,23 +1089,28 @@ int a;
 
 // s.h
 struct S {
-char c;
-int a;
+  char c;
+  int a;
 };
+
 void init_s(S &s);
+
 // s.cpp
 #include "s.h"
+
 void init_s(S &s); {
-s.c = 'a';
-s.a = 12;
+  s.c = 'a';
+  s.a = 12;
 }
+
 // a.cpp
 #pragma pack(push, 1)
 #include "s.h"
 #pragma pack(pop)
+
 void f() {
-S s;
-init_s(s);
+  S s;
+  init_s(s);
 }
 ```
 
@@ -1074,21 +1121,24 @@ init_s(s);
 ``` cpp
 // s.h
 struct S {
-char c;
-int a;
+  char c;
+  int a;
 };
+
 void init_s(S &s);
+
 // s.cpp
 #include "s.h"
 void init_s(S &s); {
-s.c = 'a';
-s.a = 12;
+  s.c = 'a';
+  s.a = 12;
 }
+
 // a.cpp
 #include "s.h"
 void f() {
-S s;
-init_s(s);
+  S s;
+  init_s(s);
 }
 ```
 
@@ -1096,9 +1146,11 @@ init_s(s);
 
 ``` cpp
 const int n = 42;
+
 int g(const int &lhs, const int &rhs);
+  
 inline int f(int k) {
-return g(k, n);
+  return g(k, n);
 }
 ```
 
@@ -1111,24 +1163,22 @@ return g(k, n);
 ``` cpp
 const int n = 42;
 int g(int lhs, int rhs); // 把常引用消除
+
 inline int f(int k) {
-return g(k, n);
+  return g(k, n);
 }
 ```
 或者像下面这样修改，
 
 ``` cpp
 enum Constants {
-N = 42
+  N = 42
 };
+
 int g(const int &lhs, const int &rhs);
+
 inline int f(int k) {
-return g(k, N);
+  return g(k, N);
 }
 ```
 把常量N改为命名的enum类型，所以N在不同的翻译单元中布局都一样了，这样就不会影响函数f，它们具有同样的链接。不违反ODR。
-
-
-
-
-

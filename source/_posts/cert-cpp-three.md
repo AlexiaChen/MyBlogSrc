@@ -18,13 +18,13 @@ tags:
 
 ``` cpp
 #include <cstddef>
-void insert_in_table(int *table, std::size_t tableSize, int pos,
-int value) {
-if (pos >= tableSize) {
-// Handle error
-return;
-}
-table[pos] = value;
+
+void insert_in_table(int *table, std::size_t tableSize, int pos, int value) {
+  if (pos >= tableSize) {
+    // Handle error
+    return;
+  }
+  table[pos] = value;
 }
 ```
 
@@ -48,29 +48,31 @@ pos最好也声明为std:size_t，这样就可以防止负数被传入进函数�
 ``` cpp
 #include <cstddef>
 #include <new>
-void insert_in_table(int *table, std::size_t tableSize, std::size_t
-pos, int value) {
-// #1
-if (pos >= tableSize) {
-// Handle error
-return;
+
+void insert_in_table(int *table, std::size_t tableSize, std::size_t pos, int value) {
+  // #1
+  if (pos >= tableSize) {
+    // Handle error
+    return;
+  }
+  table[pos] = value;
 }
-table[pos] = value;
-}
+
 template <std::size_t N>
 void insert_in_table(int (&table)[N], std::size_t pos, int value) {
-// #2
-insert_in_table(table, N, pos, value);
+  // #2
+  insert_in_table(table, N, pos, value);
 }
+
 void f() {
-// Exposition only
-int table1[100];
-int *table2 = new int[100];
-insert_in_table(table1, 0, 0); // Calls #2
-insert_in_table(table2, 0, 0); // Error, no matching func. call
-insert_in_table(table1, 100, 0, 0); // Calls #1
-insert_in_table(table2, 100, 0, 0); // Calls #1
-delete [] table2;
+  // Exposition only
+  int table1[100];
+  int *table2 = new int[100];
+  insert_in_table(table1, 0, 0); // Calls #2
+  insert_in_table(table2, 0, 0); // Error, no matching func. call
+  insert_in_table(table1, 100, 0, 0); // Calls #1
+  insert_in_table(table2, 100, 0, 0); // Calls #1
+  delete [] table2;
 }
 ```
 
@@ -80,26 +82,26 @@ delete [] table2;
 
 ``` cpp
 #include <vector>
-void insert_in_table(std::vector<int> &table, long long pos, int
-value) {
-if (pos >= table.size()) {
-// Handle error
-return;
-}
-table[pos] = value;
+
+void insert_in_table(std::vector<int> &table, long long pos, int value) {
+  if (pos >= table.size()) {
+    // Handle error
+    return;
+  }
+  table[pos] = value;
 }
 ```
 以上的代码与之前一个的代码样例中所反映的问题是一样的。long long类型的pos是有符号类型，比较可能失效，导致越界。应该改成:
 
 ``` cpp
 #include <vector>
-void insert_in_table(std::vector<int> &table, std::size_t pos, int
-value) {
-if (pos >= table.size()) {
-// Handle error
-return;
-}
-table[pos] = value;
+
+void insert_in_table(std::vector<int> &table, std::size_t pos, int value) {
+  if (pos >= table.size()) {
+    // Handle error
+    return;
+  }
+  table[pos] = value;
 }
 ```
 
@@ -107,9 +109,9 @@ table[pos] = value;
 
 ``` cpp
 #include <vector>
-void insert_in_table(std::vector<int> &table, std::size_t pos, int
-value) noexcept(false) {
-table.at(pos) = value;
+
+void insert_in_table(std::vector<int> &table, std::size_t pos, int value) noexcept(false) {
+  table.at(pos) = value;
 }
 ```
 
@@ -119,18 +121,18 @@ table.at(pos) = value;
 
 ``` cpp
 #include <iterator>
+
 template <typename ForwardIterator>
-void f_imp(ForwardIterator b, ForwardIterator e, int val,
-std::forward_iterator_tag) {
-do {
-*b++ = val;
-} while (b != e);
+void f_imp(ForwardIterator b, ForwardIterator e, int val,std::forward_iterator_tag) {
+  do {
+    *b++ = val;
+  } while (b != e);
 }
+
 template <typename ForwardIterator>
 void f(ForwardIterator b, ForwardIterator e, int val) {
-typename std::iterator_traits<ForwardIterator>::iterator_category
-cat;
-f_imp(b, e, val, cat);
+  typename std::iterator_traits<ForwardIterator>::iterator_category cat;
+  f_imp(b, e, val, cat);
 }
 ```
 
@@ -138,18 +140,18 @@ f_imp(b, e, val, cat);
 
 ``` cpp
 #include <iterator>
+
 template <typename ForwardIterator>
-void f_imp(ForwardIterator b, ForwardIterator e, int val,
-std::forward_iterator_tag) {
-while (b != e) {
-*b++ = val;
+void f_imp(ForwardIterator b, ForwardIterator e, int val,std::forward_iterator_tag) {
+  while (b != e) {
+    *b++ = val;
+  }
 }
-}
+
 template <typename ForwardIterator>
 void f(ForwardIterator b, ForwardIterator e, int val) {
-typename std::iterator_traits<ForwardIterator>::iterator_category
-cat;
-f_imp(b, e, val, cat);
+  typename std::iterator_traits<ForwardIterator>::iterator_category cat;
+  f_imp(b, e, val, cat);
 }
 ```
 先比较迭代器的合法性，再进行解引用b。
@@ -162,10 +164,7 @@ f_imp(b, e, val, cat);
 
 C++标准[container.requirements.general]有如下声明：
 
-> Unless otherwise specified (either explicitly or by defining a function in terms of other
-functions), invoking a container member function or passing a container as an argument
-to a library function shall not invalidate iterators to, or change the values of, objects
-within that container.
+> Unless otherwise specified (either explicitly or by defining a function in terms of other functions), invoking a container member function or passing a container as an argument to a library function shall not invalidate iterators to, or change the values of, objects within that container.
 
 也就是说，C++标准是允许引用和指针无效化的，当你通过容器类提供的操作函数。举个例子，当你从容器中得到一个指向某元素的指针，然后erase了那个元素，然后又在删除元素的位置insert一个新的元素，就会导致现存的指针虽然合法，但是指向了不同的对象。所以任何操作都可能会使指针或引用无效化，要慎重对待。
 
@@ -189,24 +188,26 @@ within that container.
 
 ``` cpp
 #include <deque>
+
 void f(const double *items, std::size_t count) {
-std::deque<double> d;
-auto pos = d.begin();
-for (std::size_t i = 0; i < count; ++i, ++pos) {
-d.insert(pos, items[i] + 41.0);
-}
+  std::deque<double> d;
+  auto pos = d.begin();
+  for (std::size_t i = 0; i < count; ++i, ++pos) {
+    d.insert(pos, items[i] + 41.0);
+  }
 }
 ```
 以上代码在第一次调用insert的时候pos迭代器失效了，所以就导致后续的循环导致未定义行为。可以通过插入后更新失效迭代器杜绝未定义行为:
 
 ``` cpp
 #include <deque>
+
 void f(const double *items, std::size_t count) {
-std::deque<double> d;
-auto pos = d.begin();
-for (std::size_t i = 0; i < count; ++i, ++pos) {
-pos = d.insert(pos, items[i] + 41.0);
-}
+  std::deque<double> d;
+  auto pos = d.begin();
+  for (std::size_t i = 0; i < count; ++i, ++pos) {
+    pos = d.insert(pos, items[i] + 41.0);
+  }
 }
 ```
 
@@ -216,10 +217,11 @@ pos = d.insert(pos, items[i] + 41.0);
 #include <algorithm>
 #include <deque>
 #include <iterator>
+
 void f(const double *items, std::size_t count) {
-std::deque<double> d;
-std::transform(items, items + count, std::inserter(d, d.begin()),
-[](double d) { return d + 41.0; });
+  std::deque<double> d;
+  std::transform(items, items + count, std::inserter(d, d.begin()),
+    [](double d) { return d + 41.0; });
 }
 ```
 
@@ -236,10 +238,11 @@ std::transform(items, items + count, std::inserter(d, d.begin()),
 ``` cpp
 #include <algorithm>
 #include <vector>
+
 void f(const std::vector<int> &src) {
-std::vector<int> dest;
-std::copy(src.begin(), src.end(), dest.begin());
-// ...
+  std::vector<int> dest;
+  std::copy(src.begin(), src.end(), dest.begin());
+  // ...
 }
 ```
 
@@ -250,11 +253,12 @@ std::copy(src.begin(), src.end(), dest.begin());
 ``` cpp
 #include <algorithm>
 #include <vector>
+
 void f(const std::vector<int> &src) {
-// Initialize dest with src.size() default-inserted elements
-std::vector<int> dest(src.size());
-std::copy(src.begin(), src.end(), dest.begin());
-// ...
+  // Initialize dest with src.size() default-inserted elements
+  std::vector<int> dest(src.size());
+  std::copy(src.begin(), src.end(), dest.begin());
+  // ...
 }
 ```
 
@@ -264,10 +268,11 @@ std::copy(src.begin(), src.end(), dest.begin());
 #include <algorithm>
 #include <iterator>
 #include <vector>
+
 void f(const std::vector<int> &src) {
-std::vector<int> dest;
-std::copy(src.begin(), src.end(), std::back_inserter(dest));
-// ...
+  std::vector<int> dest;
+  std::copy(src.begin(), src.end(), std::back_inserter(dest));
+  // ...
 }
 ```
 
@@ -275,9 +280,10 @@ std::copy(src.begin(), src.end(), std::back_inserter(dest));
 
 ``` cpp
 #include <vector>
+
 void f(const std::vector<int> &src) {
-std::vector<int> dest(src);
-// ...
+  std::vector<int> dest(src);
+  // ...
 }
 ```
 
@@ -286,9 +292,10 @@ std::vector<int> dest(src);
 ``` cpp
 #include <algorithm>
 #include <vector>
+
 void f() {
-std::vector<int> v;
-std::fill_n(v.begin(), 10, 0x42);
+  std::vector<int> v;
+  std::fill_n(v.begin(), 10, 0x42);
 }
 ```
 
@@ -297,15 +304,16 @@ std::fill_n(v.begin(), 10, 0x42);
 ``` cpp
 #include <algorithm>
 #include <vector>
+
 void f1() {
-std::vector<int> v(10);
-std::fill_n(v.begin(), 10, 0x42);
+  std::vector<int> v(10);
+  std::fill_n(v.begin(), 10, 0x42);
 }
 
 /////////////////
 
 void f2() {
-std::vector<int> v(10, 0x42);
+  std::vector<int> v(10, 0x42);
 }
 ```
 
@@ -330,8 +338,9 @@ std::vector<int> v(10, 0x42);
 #include <algorithm>
 #include <iostream>
 #include <vector>
+
 void f(const std::vector<int> &c) {
-std::for_each(c.end(), c.begin(), [](int i) { std::cout << i; });
+  std::for_each(c.end(), c.begin(), [](int i) { std::cout << i; });
 }
 ```
 
@@ -341,8 +350,9 @@ std::for_each(c.end(), c.begin(), [](int i) { std::cout << i; });
 #include <algorithm>
 #include <iostream>
 #include <vector>
+
 void f(const std::vector<int> &c) {
-std::for_each(c.begin(), c.end(), [](int i) { std::cout << i; });
+  std::for_each(c.begin(), c.end(), [](int i) { std::cout << i; });
 }
 ```
 
@@ -352,8 +362,9 @@ std::for_each(c.begin(), c.end(), [](int i) { std::cout << i; });
 #include <algorithm>
 #include <iostream>
 #include <vector>
+
 void f(const std::vector<int> &c) {
-std::for_each(c.rbegin(), c.rend(), [](int i) { std::cout << i; });
+  std::for_each(c.rbegin(), c.rend(), [](int i) { std::cout << i; });
 }
 ```
 
@@ -363,9 +374,10 @@ std::for_each(c.rbegin(), c.rend(), [](int i) { std::cout << i; });
 #include <algorithm>
 #include <iostream>
 #include <vector>
+
 void f(const std::vector<int> &c) {
-std::vector<int>::const_iterator e;
-std::for_each(c.begin(), e, [](int i) { std::cout << i; });
+  std::vector<int>::const_iterator e;
+  std::for_each(c.begin(), e, [](int i) { std::cout << i; });
 }
 ```
 
@@ -382,39 +394,40 @@ std::for_each(c.begin(), e, [](int i) { std::cout << i; });
 ``` cpp
 #include <cstddef>
 #include <iostream>
+
 template <typename Ty>
 bool in_range(const Ty *test, const Ty *r, size_t n) {
-return 0 < (test - r) && (test - r) < (std::ptrdiff_t)n;
+  return 0 < (test - r) && (test - r) < (std::ptrdiff_t)n;
 }
+
 void f() {
-double foo[10];
-double *x = &foo[0];
-double bar;
-std::cout << std::boolalpha << in_range(&bar, x, 10);
+  double foo[10];
+  double *x = &foo[0];
+  double bar;
+  std::cout << std::boolalpha << in_range(&bar, x, 10);
 }
 ```
 以上代码意图测试指针test，是否在[r,r+n]这个迭代器范围内，然而test并没有指向这个合法的范围容器中，所以test与r相减导致未定义行为。
 
 ``` cpp
 #include <iostream>
+
 template <typename Ty>
 bool in_range(const Ty *test, const Ty *r, size_t n) {
-return test >= r && test < (r + n);
+  return test >= r && test < (r + n);
 }
+
 void f() {
-double foo[10];
-double *x = &foo[0];
-double bar;
-std::cout << std::boolalpha << in_range(&bar, x, 10);
+  double foo[10];
+  double *x = &foo[0];
+  double bar;
+  std::cout << std::boolalpha << in_range(&bar, x, 10);
 }
 ```
 
 以上代码试图整改，用比较运算符让test和r不必做减法，但是还是有问题的。因为C++标准有以下描述:
 
-> If two operands p and q compare equal, p<=q and p>=q both yield true and p<q and
-p>q both yield false. Otherwise, if a pointer p compares greater than a pointer q,
-p>=q, p>q, q<=p, and q<p all yield true and p<=q, p<q, q>=p, and q>p all yield
-false. Otherwise, the result of each of the operators is unspecified.
+> If two operands p and q compare equal, p<=q and p>=q both yield true and p<q and p>q both yield false. Otherwise, if a pointer p compares greater than a pointer q, p>=q, p>q, q<=p, and q<p all yield true and p<=q, p<q, q>=p, and q>p all yield false. Otherwise, the result of each of the operators is unspecified.
 
 所以比较两个不指向同一个容器的指针会导致未指定行为(unspecified hebavior)。尽管与之前的代码有所改善,但是还是不会产生可移植性的代码，可能在其他的硬件平台上就会失败(x86以外的平台)。然后我们再来改进以上代码。
 
@@ -422,21 +435,23 @@ false. Otherwise, the result of each of the operators is unspecified.
 #include <iostream>
 #include <iterator>
 #include <vector>
+
 template <typename RandIter>
 bool in_range_impl(RandIter test, RandIter r_begin, RandIter r_end,
-std::random_access_iterator_tag) {
-return test >= r_begin && test < r_end;
+  std::random_access_iterator_tag) {
+  return test >= r_begin && test < r_end;
 }
+
 template <typename Iter>
 bool in_range(Iter test, Iter r_begin, Iter r_end) {
-typename std::iterator_traits<Iter>::iterator_category cat;
-return in_range_impl(test, r_begin, r_end, cat);
+  typename std::iterator_traits<Iter>::iterator_category cat;
+  return in_range_impl(test, r_begin, r_end, cat);
 }
+
 void f() {
-std::vector<double> foo(10);
-std::vector<double> bar(1);
-std::cout << std::boolalpha
-<< in_range(bar.begin(), foo.begin(), foo.end());
+  std::vector<double> foo(10);
+  std::vector<double> bar(1);
+  std::cout << std::boolalpha << in_range(bar.begin(), foo.begin(), foo.end());
 }
 ```
 
@@ -445,46 +460,48 @@ std::cout << std::boolalpha
 ``` cpp
 #include <functional>
 #include <iostream>
+
 template <typename Ty>
 bool in_range(const Ty *test, const Ty *r, size_t n) {
-std::less<const Ty *> less;
-return !less(test, r) && less(test, r + n);
+  std::less<const Ty *> less;
+  return !less(test, r) && less(test, r + n);
 }
+
 void f() {
-double foo[10];
-double *x = &foo[0];
-double bar;
-std::cout << std::boolalpha << in_range(&bar, x, 10);
+  double foo[10];
+  double *x = &foo[0];
+  double bar;
+  std::cout << std::boolalpha << in_range(&bar, x, 10);
 }
 ```
 
 以上代码用STL中的std::less<>来代替比较操作运算符。但是C++标准[comparisons]有如下声明:
 
->  For templates greater, less, greater_equal, and less_equal, the
-specializations for any pointer type yield a total order, even if the built-in operators <, >,
-<=, >= do not.
+>  For templates greater, less, greater_equal, and less_equal, the specializations for any pointer type yield a total order, even if the built-in operators <, >, <=, >= do not.
 
 也就是这种方法是依赖实现的，实现不确定。结果是，以上代码还是没有移植性，std::less<>中如果还是有比较运算，那么同样会导致未定义行为。下面我们用另一种不会出现任何问题的方法来达到我们的目的，无非就是损失点性能。
 
 ``` cpp
 #include <iostream>
+
 template <typename Ty>
 bool in_range(const Ty *test, const Ty *r, size_t n) {
-auto *cur = reinterpret_cast<const unsigned char *>(r);
-auto *end = reinterpret_cast<const unsigned char *>(r + n);
-auto *testPtr = reinterpret_cast<const unsigned char *>(test);
-for (; cur != end; ++cur) {
-if (cur == testPtr) {
-return true;
-}v
+  auto *cur = reinterpret_cast<const unsigned char *>(r);
+  auto *end = reinterpret_cast<const unsigned char *>(r + n);
+  auto *testPtr = reinterpret_cast<const unsigned char *>(test);
+  for (; cur != end; ++cur) {
+    if (cur == testPtr) {
+      return true;
+    }
+  }
+  return false;
 }
-return false;
-}
+
 void f() {
-double foo[10];
-double *x = &foo[0];
-double bar;
-std::cout << std::boolalpha << in_range(&bar, x, 10);
+  double foo[10];
+  double *x = &foo[0];
+  double bar;
+  std::cout << std::boolalpha << in_range(&bar, x, 10);
 }
 ```
 
@@ -496,27 +513,22 @@ std::cout << std::boolalpha << in_range(&bar, x, 10);
 
 C++标准[expr.add]有如下描述：
 
-> If both the pointer operand and the result point to elements of the same array object, or
-one past the last element of the array object, the evaluation shall not produce an
-overflow; otherwise, the behavior is undefined.
+> If both the pointer operand and the result point to elements of the same array object, or one past the last element of the array object, the evaluation shall not produce an overflow; otherwise, the behavior is undefined.
 
 因为迭代器是指针的泛化。所以通过在迭代器上做加法也有与指针一样的限制，C++标准[iterator.requirement.general]有如下声明：
 
-> Just as a regular pointer to an array guarantees that there is a pointer value pointing
-past the last element of the array, so for any iterator type there is an iterator value that
-points past the last element of a corresponding sequence. These values are called pastthe-end values. Values of an iterator i for which the expression *i is defined are called
-dereferenceable. The library never assumes that past-the-end values are
-dereferenceable.
+> Just as a regular pointer to an array guarantees that there is a pointer value pointing past the last element of the array, so for any iterator type there is an iterator value that points past the last element of a corresponding sequence. These values are called pastthe-end values. Values of an iterator i for which the expression *i is defined are called dereferenceable. The library never assumes that past-the-end values are dereferenceable.
 
 #### 代码样例对比
 
 ``` cpp
 #include <iostream>
 #include <vector>
+
 void f(const std::vector<int> &c) {
-for (auto i = c.begin(), e = i + 20; i != e; ++i) {
-std::cout << *i << std::endl;
-}
+  for (auto i = c.begin(), e = i + 20; i != e; ++i) {
+    std::cout << *i << std::endl;
+  }
 }
 ```
 以上代码因为不知道vector的size，就在begin位置偏移了20个单位，天晓得vector运行到f函数的时候是多大，所以应该改成以下：
@@ -524,12 +536,12 @@ std::cout << *i << std::endl;
 ``` cpp
 #include <algorithm>
 #include <vector>
+
 void f(const std::vector<int> &c) {
-const std::vector<int>::size_type maxSize = 20;
-for (auto i = c.begin(), e = i + std::min(maxSize, c.size());
-i != e; ++i) {
-// ...
-}
+  const std::vector<int>::size_type maxSize = 20;
+  for (auto i = c.begin(), e = i + std::min(maxSize, c.size()); i != e; ++i) {
+    // ...
+  }
 }
 ```
 
@@ -561,23 +573,26 @@ C++标准[sxpr.sub]中还说了，数据加小标其实本质就是指针算数�
 // / ... definitions for S, T, globI, globD ...
 int globI;
 double globD;
+
 struct S {
-int i;
-S() : i(globI++) {}
+  int i;
+  S() : i(globI++) {}
 };
+
 struct T : S {
-double d;
-T() : S(), d(globD++) {}
+  double d;
+  T() : S(), d(globD++) {}
 };
 
 void f(const S *someSes, std::size_t count) {
-for (const S *end = someSes + count; someSes != end; ++someSes) {
-std::cout << someSes->i << std::endl;
+  for (const S *end = someSes + count; someSes != end; ++someSes) {
+    std::cout << someSes->i << std::endl;
+  }
 }
-}
+
 int main() {
-T test[5];
-f(test, 5);
+  T test[5];
+  f(test, 5);
 }
 ```
 
@@ -588,22 +603,26 @@ f(test, 5);
 // ... definitions for S, T, globI, globD ...
 int globI;
 double globD;
+
 struct S {
-int i;
-S() : i(globI++) {}
+  int i;
+  S() : i(globI++) {}
 };
+
 struct T : S {
-double d;
-T() : S(), d(globD++) {}
+  double d;
+  T() : S(), d(globD++) {}
 };
+
 void f(const S *someSes, std::size_t count) {
-for (std::size_t i = 0; i < count; ++i) {
-std::cout << someSes[i].i << std::endl;
+  for (std::size_t i = 0; i < count; ++i) {
+    std::cout << someSes[i].i << std::endl;
+  }
 }
-}
+
 int main() {
-T test[5];
-f(test, 5);
+  T test[5];
+  f(test, 5);
 }
 ```
 
@@ -614,27 +633,29 @@ f(test, 5);
 // ... definitions for S, T, globI, globD ...
 int globI;
 double globD;
+
 struct S {
-int i;
-S() : i(globI++) {}
+  int i;
+  S() : i(globI++) {}
 };
+
 struct T : S {
-double d;
-T() : S(), d(globD++) {}
+  double d;
+  T() : S(), d(globD++) {}
 };
 
 void f(const S * const *someSes, std::size_t count) {
-for (const S * const *end = someSes + count;
-someSes != end; ++someSes) {
-std::cout << (*someSes)->i << std::endl;
+  for (const S * const *end = someSes + count; someSes != end; ++someSes) {
+    std::cout << (*someSes)->i << std::endl;
+  }
 }
-}
+
 int main() {
-S *test[] = {new T, new T, new T, new T, new T};
-f(test, 5);
-for (auto v : test) {
-delete v;
-}
+  S *test[] = {new T, new T, new T, new T, new T};
+  f(test, 5);
+  for (auto v : test) {
+    delete v;
+  }
 }
 ```
 
@@ -646,16 +667,17 @@ delete v;
 // ... definitions for S, T, globI, globD ...
 template <typename Iter>
 void f(Iter i, Iter e) {
-for (; i != e; ++i) {
-std::cout << (*i)->i << std::endl;
+  for (; i != e; ++i) {
+    std::cout << (*i)->i << std::endl;
+  }
 }
-}
+
 int main() {
-std::vector<S *> test{new T, new T, new T, new T, new T};
-f(test.cbegin(), test.cend());
-for (auto v : test) {
-delete v;
-}
+  std::vector<S *> test{new T, new T, new T, new T, new T};
+  f(test.cbegin(), test.cend());
+  for (auto v : test) {
+    delete v;
+  }
 }
 ```
 
@@ -672,12 +694,13 @@ delete v;
 #include <functional>
 #include <iostream>
 #include <set>
+
 void f() {
-std::set<int, std::less_equal<int>> s{5, 10, 20};
-for (auto r = s.equal_range(10); r.first != r.second; ++r.first)
-{
-std::cout << *r.first << std::endl;
-}
+  std::set<int, std::less_equal<int>> s{5, 10, 20};
+  for (auto r = s.equal_range(10); r.first != r.second; ++r.first)
+  {
+    std::cout << *r.first << std::endl;
+  }
 }
 ```
 
@@ -686,12 +709,13 @@ std::cout << *r.first << std::endl;
 ``` cpp
 #include <iostream>
 #include <set>
+
 void f() {
-std::set<int> s{5, 10, 20};
-for (auto r = s.equal_range(10); r.first != r.second; ++r.first)
-{
-std::cout << *r.first << std::endl;
-}
+  std::set<int> s{5, 10, 20};
+  for (auto r = s.equal_range(10); r.first != r.second; ++r.first)
+  {
+    std::cout << *r.first << std::endl;
+  }
 }
 ```
 
@@ -702,6 +726,7 @@ std::cout << *r.first << std::endl;
 ``` cpp
 #include <iostream>
 #include <set>
+
 class S {
  int i, j;
  
@@ -764,11 +789,7 @@ void f() {
 
 C++标准库中大量的STL算法可能都允许接收一个谓词函数对象，在C++标准[algorithms.general]有如下描述：
 
-> [Note: Unless otherwise specified, algorithms that take function objects as arguments
-are permitted to copy those function objects freely. Programmers for whom object
-identity is important should consider using a wrapper class that points to a noncopied
-implementation object such as reference_wrapper<T>, or some equivalent
-solution. — end note]
+> [Note: Unless otherwise specified, algorithms that take function objects as arguments are permitted to copy those function objects freely. Programmers for whom object identity is important should consider using a wrapper class that points to a noncopied implementation object such as reference_wrapper<T>, or some equivalent solution. — end note]
 
 因为这些STL算法是实现定义的，没办法保证算法是否拷贝了谓词函数对象。
 
@@ -896,37 +917,3 @@ void f() {
 Contains: 0 1 2 3 4 5 6 7 8 9
 Contains: 0 1 3 4 5 6 7 8 9
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

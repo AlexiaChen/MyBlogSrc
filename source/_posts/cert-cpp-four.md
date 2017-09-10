@@ -19,28 +19,33 @@ C风格的字符串数组要求字符串结尾隐式包含一个null结束符('\
 ``` cpp
 //bad, 输入无边界，容器溢出
 #include <iostream>
+
 void f() {
-char buf[12];
-std::cin >> buf;
+  char buf[12];
+  std::cin >> buf;
 }
+
 ////////////////////////////////
 // 还是不正确，bufOne不会溢出，但实际BufTwo会溢出
 #include <iostream>
+
 void f() {
-char bufOne[12];
-char bufTwo[12];
-std::cin.width(12);
-std::cin >> bufOne;
-std::cin >> bufTwo;
+  char bufOne[12];
+  char bufTwo[12];
+  std::cin.width(12);
+  std::cin >> bufOne;
+  std::cin >> bufTwo;
 }
+
 /////////////////////////////////////////
 // 以下就正确了
 #include <iostream>
 #include <string>
+
 void f() {
-std::string input;
-std::string stringOne, stringTwo;
-std::cin >> stringOne >> stringTwo;
+  std::string input;
+  std::string stringOne, stringTwo;
+  std::cin >> stringOne >> stringTwo;
 }
 ```
 
@@ -183,9 +188,3 @@ void f() {
 严重程度：高
 
 此条款是CTR50-CPP规则的一条特例，所以不作过多讨论。
-
-
-
-
-
-
