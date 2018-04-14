@@ -201,13 +201,351 @@ P (fact) -> λ n .
 
 我们发现了函数P的一个[不动点](https://en.wikipedia.org/wiki/Fixed-point_combinator),什么是不动点呢？就是一个点（广义上的）在一个函数的映射下,函数的值仍然为这个点: f(x) = x 。所以，思路就是找到不动点，如果找到了不动点，就可以把“伪递归”函数P转化为真正的递归函数了。
 
-所以，我们假设需要一个函数Y，
+所以，我们假设需要一个函数Y，它可以找到这个伪递归函数的不动点，即：
+
+- Y(F) = f = F(Y(F))
+
+其中F(f) = f, 那么就有
+
+- Y(P) = fact
+
+只要有了Y，就可以把伪递归函数变换成真递归函数了。
+
+## 构造Y组合子
+
+一起来一睹Y组合子的尊容吧:
+
+- let Y = λ F. G(G)
+- 其中G =  λ self. F(self(self))
 
 
-（ To be continue, 时间不够）
+## 验证一下
+
+Y(P)
+= G(G)  , 其中G = λ self. P(self(self))
+= P(G(G))
+= λ n. if (n==0) 1 (n * G(G) n - 1)
+假设 Y(P) = fact, 那么
+Y(P) = fact = λ n. if (n==0) 1 (n * fact n-1)
+
+这就是我们梦寐以求的真正的递归函数!
+
+所以，当我们想定义递归函数的时候，只需要增加一个self参数，按伪递归的方法定义，然后再用Y组合子一套用，就变成我们想要的真递归了。
 
 
+# 图灵等价
+
+以上已经成功地推导出了Y组合子，就相当于在λ演算公理体系中推导出了一条定理：
+
+- 可以在定义函数的过程中引用自身
+
+这条定理是证明λ演算与图灵机等价的一个重要步骤。
+
+那么这两个不同的计算模型等价意为着什么呢？
+
+意味着它的计算能力与我们现实生活中的物理计算机的计算能力是一致的，图灵机的工作模型更接近于物理上的机器，冯诺依曼架构就是图灵机的物理实现。换句话说，也就是说，我们写的任何程序都能用λ演算来描述，同时λ演算描述的函数一定可以由计算机计算。
+
+## 停机问题的等价问题
+
+回想之前的停机问题，即不可判定一个图灵机在给定任意输入的时候是否可以停机。
+
+这个命题在λ演算中的等价命题是：
+
+<font color="red">**不存在一个算法能判定任何两个λ函数是否等价，即对于所有的n，有f(n)=g(n)**</font>
 
 
+# 现实世界中的函数式编程
+
+之前都是在分析λ演算的理论，是数学化的思维，下面就请看基于λ演算发展出来的函数式语言是什么样子？ 用工程化的思维来看看现实世界的函数式编程。
+
+## Haskell
+
+Haskell是一种纯函数式编程语言，它追求的是最纯粹的函数式，名字是为了纪念Haskell Curry而命名的。之前提到的Y组合子就是这位老哥发现的，此外他还提出了函数柯里化(Currying)，即部分求值。
+
+Haskell中的一切都是函数，甚至没有命令式编程（面向过程或面向对象）中变量的概念。它的变量全部都是只允许一次赋值，然后不可改变，就像数学推导中对变量的赋值一样。
+
+Haskell还没有一般意义上的控制流，如for循环等，取而代之的是递归。
+
+Haskell还有两个重要的特性，即无副作用和惰性求值。
+
+无副作用指的是任何函数在给定同样输入的情况下每次调用的结果都一样，跟数学中的函数是一样的。而惰性求值指的是函数除非需要，否则不会立即计算。
+
+### 第一个Haskell程序
+
+``` haskell
+let max a b = if a>b then a else b
+
+
+max 3 4   -- print 4
+
+max 1.001 1 -- print 1.001
+
+max "MathxH" "ChenAlex1233"  -- print "ChenAlex1233"
+```
+
+### 列表
+
+Haskell中的列表定义是这样的：
+
+- list X :: = [] || elem : (list X)
+即：
+
+- 空列表 = []
+- [1] = 1:[]
+- [1,2,3] = 1:2:3:[]
+
+输入2:1:3:7:8:[] 可以看到
+[2,1,3,7,8]
+
+### 模式匹配
+
+定义：
+- let first (elem:rest) = elem
+
+输入first [1,3] 可以看到结果是1。
+elem:rest 是Haskell的函数参数模式匹配。
+对于列表[1,3],实质上是1:3:[], elem匹配了1，rest匹配了3:[]， 也就是[3]。
+
+### 列表求和
+
+``` haskell
+accumulate [] = 0
+accumulate (elem:rest) = elem + accumulate rest
+main = print (accumulate [1,2,3]) -- print 6
+```
+
+### 判断回文
+
+``` haskell
+
+palindrome [] = True
+palindrome [_] = True
+palindrome (elem:rest) = (elem == last rest) && (palindrome(init rest)) -- init:返回一个列表中除了最后一个元素的其他元素
+
+palindrome [1,2,3,2,1] -- print True
+palindrome [1,1,2]   -- print False
+palindrome "madam"  -- print True
+```
+
+### 删除连续重复元素
+
+``` haskell
+cut cond [] = []
+cut cond (elem:rest) = if cond elem then 
+                         cut cond rest else
+                         elem:rest
+compress [] = []
+compress (elem:rest) = elem : compress (cut (== elem) rest)
+
+compress [1,2,2,2,3,3]  -- print [1,2,3]
+compress "aaabbaccc"  -- print "abac"
+```
+
+下面来点华丽的推导过程：
+
+
+  compress [1,2,2,2,3,3]   
+=> 1 : compress (cut (== 1) [2,2,2,3,3])   
+=> 1 : compress (if (== 1) 2 then cut (== 1) [2,2,3,3] else [2,2,2,3,3])  
+=> 1 : compress [2,2,2,3,3]  
+=> 1 : 2 : compress (cut (== 2) [2,2,3,3])  
+=> 1 : 2 : compress (if (== 2) 2 then cut (== 2) [2,3,3] else [2,2,3,3])  
+=> 1 : 2 : compress (cut (== 2) [2,3,3])  
+=> 1 : 2 : compress (if (== 2) 2 then cut (== 2) [3,3] else [2,3,3])  
+=> 1 : 2 : compress (cut (== 2) [3,3])  
+=> 1 : 2 : compress (if (== 2) 3 then cut (== 2) [3] else [3,3])   
+=> 1 : 2 : compress [3,3]  
+=> 1 : 2 : 3 : compress (cut (== 3) [3])  
+=> 1 : 2 : 3 : compress (if (== 3) 3 then cut (== 3) [] else [3])  
+=> 1 : 2 : 3 : compress (cut (== 3) [])   
+=> 1 : 2 : 3 : compress []  
+=> 1 : 2 : 3 : []  
+=> [1,2,3]
+
+### 惰性求值
+
+Haskell中可以定义无穷列表，例如：
+- [1..]表示所有的正整数
+- [1,3..]表示所有的奇数
+
+这在大多数编程语言中都是不可思议的，因为大多数语言都是及早求值(early evaluation)，Haskell的惰性求值(lazy evaluation)特性可以让列表按需取用。
+
+例如[1,3..] !! 42 可以返回结果85
+
+### 斐波那契数列
+
+如何用Haskell实现斐波那契数列呢？最符合数学化的描述方法是:
+
+``` haskell
+fib 0 = 1
+fib 1 = 1
+fib a = fib (a - 1) + fib (a - 2)
+```
+
+不巧的是，这个算法是O(2^N)的，因为Haskell编译器还没有聪明到可以实现递归记忆化。
+
+### 斐波那契数列的线性算法
+
+让我们利用无穷列表来实现线性算法！ 一行代码就可以了：
+
+- fib = 1:1:zipWith (+) fib (tail fib)
+
+fib !! 4是5，  fib !! 42 是433494437
+fib !! 1000输出：
+7033036771142281582183525487718354977018
+1269836358732742604905087154537118196933
+5797422494945626117334877504492417659910
+8818636326545022364710601205337412127386
+7339111198139373125598767690091902245245
+323403501 
+
+解释下以上代码:
+
+tail返回列表除了第一项以外的后面内容，例如 tail [1..] 返回 [2..]
+
+zipWith是将两个列表的每个元素通过一个函数非别计算，并返回结果的列表，例如：
+
+- zipWith (*) [2,3,5] [1,2,3] 返回[2,6,15]
+
+于是乎，fib  =  1:1:zipWith  (+)  fib  (tail  fib)  生成了一个无穷列表，前面两个元素都是1，后面的元素由现有列表错位相加而成，即:
+
+    [1,  1,  2,  3,  5,  8,  13,  21…]   //fib    
+\+  [1,  2,  3,  5,  8,  13,  21,  34…]   //tail  fib    
+=  [2,  3,  5,  8,  13,  21,  34,  55…] 
+
+由于惰性求值，列表不会被立即计算，只有当我们用到其中元素的时候才会算。 
+
+
+### 快速排序
+
+``` haskell
+qsort (elem:rest) = (qsort lesser) ++ [elem] ++ (qsort greater)
+   where
+    lesser = filter (< elem) rest
+    greater = filter (>= elem) rest
+```
+
+++ 用于列表连接
+filter返回列表中满足条件的元素组成的列表
+
+### 二叉树并表示
+
+``` haskell
+data Tree a = Empty | Node a (Tree a) (Tree a)
+tree = Node 'd'
+    (Node 'b'
+       (Node 'a' Empty Empty)
+       (Node 'c' Empty Empty)
+    )
+    (Node 'e'
+      Empty
+      (Node 'g'
+        (Node 'f' Empty Empty)
+        Empty
+      )
+    )
+
+```
+以上代码构建了一个二叉树，是这样的:
+
+``` tree
+       d
+      / \
+     b   e
+    / \   \
+   a   c   g
+          /
+         f
+```
+
+下面对这个二叉树进行中序遍历:
+
+``` haskell
+inorder  Empty  =  [] 
+inorder  (Node  value  left  right)  = 
+inorder  left  ++  [value]  ++  inorder  right 
+
+inorder tree  -- print "abcdefg"
+```
+
+然后求树的高度:
+
+``` haskell
+height  Empty  =  0 
+height  (Node  value  left  right)  =  
+max  (height  left)  (height  right)  +  1 
+
+height tree -- print 4
+```
+
+### 高阶函数
+
+高阶函数的参数是函数，通过部分求值可以返回函数。
+
+``` haskell
+traverse  func  zero  Empty  =  zero 
+traverse  func  zero  (Node  value  left  right)  = 
+func  value  
+(traverse  func  zero  left)  
+(traverse  func  zero  right) 
+height_func  _  a  b  =  max  a  b  +  1 
+
+traverse  height_func  0  tree  -- print 4
+```
+
+中序遍历函数：
+
+inorder_func  value  left  right  =  left  ++ 
+[value]  ++  right 
+
+通过部分求值产生低阶函数：
+
+inorder  =  traverse  inorder_func  [] 
+
+inorder tree  -- print "abcdefg"
+
+### 闭包
+
+``` javascript
+function  make_closure()  { 
+  var  inner_varible  =  0; 
+  return  function  ()  { 
+    return  inner_varible++; 
+  } 
+} 
+var  counter  =  make_closure(); 
+counter();  //  0 
+counter();  //  1
+```
+
+### 用闭包实现柯里化
+
+多数编程语言无法部分求值，原因是柯里化与参数表机制冲突。但可以用闭包实现。但是Java，C++ 11等主流编程语言对于闭包的支持就是半残。下面用js来表达吧。
+
+``` javascript
+
+function pow(x, y){
+    return x ^ y;
+}
+
+
+// 对pow函数部分求值
+function  pow5(x)  { 
+  return  pow(x,  5); 
+} 
+pow5(2);  //输出  32
+```
+
+上面的代码实质上是:
+
+``` javascript
+function  pow5(x)  { 
+  return  function (x, 5){
+    return x ^ 5;
+};  
+} 
+```
+
+EOF
 
 
