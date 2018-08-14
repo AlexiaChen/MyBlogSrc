@@ -1,6 +1,6 @@
 ---
 title: 你好，manjaro
-date: 2018-01-12 16:00:00
+date: 2018-08-11 09:00:00
 tags: 
  - Linux              
 ---
