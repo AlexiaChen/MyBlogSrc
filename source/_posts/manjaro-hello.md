@@ -30,7 +30,6 @@ tags:
 
 - 高度可定制化，而且Xfce的DE，资源占用低。
 
-
 ## 折腾手记
 ---
 
@@ -58,10 +57,13 @@ yaourt是pacman的一个外壳，同时它还支持AUR。AUR是一个Arch Linux�
 如果不用yaourt，你恐怕得手动编译软件的很多东西，要多敲十几个命令行，不划算。yaourt这些步骤都对用户透明化了。方便不少。不过这里提示一点，AUR里面的软件毕竟是野生的，没有经过完全测试，没有官方源提供的安全，所以有一定风险，安装一个软件前，需要仔细评估，查看用户评论。但是Arch软件巨多，就是强大在AUR上面了。
 
 运行一下命令就安装yaourt了:
+
 ```bash
 sudo pacman -S yaourt
 ```
+
 之后你就可以通过以下命令搜索AUR上的软件了:
+
 ```bash
 yaourt -Ss [package name]
 ```
@@ -71,6 +73,7 @@ yaourt -Ss [package name]
 毕竟我是微软的粉丝，最近几年微软大力支持开源。VSCode真是良心的开源跨平台的编辑器产品，获得网络上的一致好评，在windiws下用它也用的多。反正Linux下的vi vim nano这些用得不顺手，也不熟悉。
 
 直接用yaourt安装VSCode:
+
 ```bash
 yaourt -S visual-studio-code-bin
 ```
@@ -82,11 +85,13 @@ yaourt -S visual-studio-code-bin
 1. 首先添加国内源
 
 打开/etc/pacman.conf配置文件。并在文件末尾添加:
-```
+
+```conf
 [archlinuxcn]
 SigLevel = Optional TrustedOnly
 Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 ```
+
 2. 更新源并导入GPG Key
 
 ```bash
@@ -124,6 +129,42 @@ sudo yaourt -S clion
 sudo yaourt -S clion-cmake
 sudo yaourt -S clion-gdb
 sudo yaourt -S clion-jre
+
+```
+
+#### 安装Adobe Flash Player Plugin
+
+这样最起码可以看bilibili了，= =。
+
+```bash
+sudo pacman -S flashplugin
+```
+
+#### 安装迅雷
+
+我发现Linux下的aria2这个下载神器堪比迅雷，我下载aria2，并配置了aria2.conf中的tracker，还是不行，下载几乎没啥速度。而且aria2也不支持ed2k。而在Linux上支持ed2k的amule客户端下载速度也是以0计算。太烂了，也许不能开箱即用吧。
+
+想想还是迅雷好，国产Deepin已经通过deepin-wine已经完美移植迅雷过来了。所以我们安装下就可以了。
+
+```bash
+sudo pacman -S deepin-wine
+sudo pacman -S deepin.com.thunderspeed
+```
+
+这里我感谢武汉深之度的程序员日日夜夜的努力，这种造福人类的事情值得表扬。当然安装上迅雷有点BUG，就是中文字符显示不出来。我只能猜着点击按钮下载，不过好在界面布局我比较熟悉，下载没出啥意外。电影天堂的大部分ftp电影都能下载下来。
+
+#### 影音娱乐
+
+音乐就听听网易云的Web版本了。电影的话，manjaro自带VLC，这个极度强大，但是界面不好看。把它卸载了。
+
+```bash
+sudo pacman -Rss vlc
+```
+
+换了deepin出品的deepin-movie。
+
+```bash
+sudo pacman -S deepin-movie
 ```
 
 #### 推荐些命令行神器
@@ -147,9 +188,3 @@ sudo yaourt -S clion-jre
 - [Graphviz](http://www.graphviz.org/),可以将文本转化为图表
 
 - [httpie](https://github.com/jakubroztocil/httpie), 测试http接口的时候，感觉比curl简单。curl毕竟更底层些，但是curl却更加灵活。
-
-
-
-
-
-
