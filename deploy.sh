@@ -47,5 +47,3 @@ git push -u origin master
 cd $blogSrc
 
 echo "backup finished"
-
-
