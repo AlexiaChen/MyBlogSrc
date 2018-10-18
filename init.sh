@@ -4,3 +4,6 @@ cd ..
 mkdir src
 cd src
 hexo init
+cd ..
+git clone https://github.com/AlexiaChen/AlexiaChen.github.io.git
+

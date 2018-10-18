@@ -27,6 +27,7 @@ cd $blogHome
 
 git add --all .
 git commit -m"deploy and update blog"
+git pull origin master
 git push -u origin master
 
 echo "deploy finished"
@@ -42,6 +43,7 @@ cd $blogSrcBakup
 
 git add --all .
 git commit -m"backup blog"
+git pull origin master
 git push -u origin master
 
 cd $blogSrc
