@@ -4,9 +4,10 @@ date: 2018-10-15 20:30:48
 tags: 
      - 程序语言理论
      - 有限自动机
+     - 计算理论
 ---
 
-> *简单是终极的复杂。* -- *达 芬奇*
+> *简单是终极的复杂* -- *达 芬奇*
 
 ## 前言
 
@@ -126,7 +127,7 @@ rules.next_state(2,'b')
 
 到这里，是否能根据这个规则集合画出对应的DFA的图呢，这是可以的。下图就是以上RuleSet对应的自动机
 
-![](http://wx3.sinaimg.cn/large/a1ac93f3gy1fwcprbf862j20ac05f0so.jpg)
+![DFA](http://wx3.sinaimg.cn/large/a1ac93f3gy1fwcprbf862j20ac05f0so.jpg)
 
 不过，这台自动机没有终止状态，还不完整，所以我们要编写一个DFA的类的表示DFA来配置RuleSet和初始状态，终止状态，加入读取字符流的接口，并模拟抽象机器的运行，这样就灵活了。计算机科学很重要的一点就是抽象思维，分离变化与不变化。是不是跟上一章讲解语义的一样呢？其实都相当于一台解释器。
 
@@ -206,7 +207,7 @@ DFAMaker.new(1,[1],rules).accepts?('b')
 
 假设我们想要一台自动机，它能接受由a和b组成的第三个字符是b的任意字符串，那么很容易想到以下DFA的图示：
 
-![](http://wx3.sinaimg.cn/large/a1ac93f3gy1fx90t9coulj20d808rq30.jpg)
+![DFA图示](http://wx3.sinaimg.cn/large/a1ac93f3gy1fx90t9coulj20d808rq30.jpg)
 
 
 以上的DFA处于状态3的时候，一旦读取到b就终止了，如果后面还有输入字符，就不停的循环进入终止状态5，反正目的达到了，只要是第三个字符是b的任意字符串就可以了，但是状态3读到了a字符，那么之后无论遇到什么输入，直到字符流读取完成，字符串也不能被该DFA识别了。
@@ -219,11 +220,114 @@ DFAMaker.new(1,[1],rules).accepts?('b')
 
 NFA就是对于每个状态特定的输入结果下，跳转的下一个状态都是不确定的。这个不确定的概念给自动机带来了更加强大的能力。这样就可以很轻松设计以下一台NFA：
 
-![](http://wx1.sinaimg.cn/large/a1ac93f3gy1fx91nipz96j20bu0553yg.jpg)
+![NFA图示](http://wx1.sinaimg.cn/large/a1ac93f3gy1fx91nipz96j20bu0553yg.jpg)
 
 查看以上NFA，对于状态1来说，接受一个字符b，它有可能保持在状态1，也可能跳转到状态2。也就是，对于状态1来说，字符b的输入导致的结果是不确定的。
 
 用以上NFA来识别字符串“baa”，读取完字符串之后，最终状态可能停留在状态1，也可能停留在状态4接受态。所以用NFA来识别字符串就要遍历所有可能的状态执行路径，只要存在一种路径能达到终止态，那么该字符串就被这台NFA所接受识别。哈，这么来看有点暴力搜索了，但是没办法，因为我们现实世界的物理计算机就是确定性的计算机，要模拟非确定性只有这样的办法了
 
+这样的暴力方式很容易可以看到两种实现，一个是采用递归，一种是采用线程并行，但是这两种实现都有点复杂和低效。
+
+我们可以采用一种更简洁高效的模拟，模仿DFA的模拟实现。
+
+很简单，最开始与DFA类似，也要创建一个RuleSet来存放规则集合。它与DFA不一样的是，在某个状态时接收相同的输入，可能跳转转移的状态不一致，也就是可能下一个状态是多个可能，所以需要引入编程语言提供的集合（Set）的概念来给下一个状态集去重。
+
+```ruby
+require 'set'
+
+class FARule < Struct.new(:state, :character, :next_state)
+  def applies_to?(state,character)
+    self.state == state && self.character == character
+  end
+
+  def follow
+    next_state;
+  end
+
+  def inspect
+    "#<FARule #{state.inspect} --#{character}--> #{next_state}>"
+  end
+end
+
+class NFARuleSet < Struct.new(:rules)
+  def next_states(states, character)
+    states.flat_map { |state| follow_rules_for(state, character) }.to_set
+  end
+
+  def follow_rules_for(state, character)
+    rules_for(state, character).map(&:follow)
+  end
+
+  def rules_for(state, character)
+    rules.select { |rule| rule.applies_to?(state, character) } # select * where 
+  end
+end
+
+```
+
+好的，现在我们来用以上的Ruby类来定义上一副图示所表示的NFA：
+
+```ruby
+ruleset = NFARuleSet.new([
+  FARule.new(1, 'a', 1), FARule.new(1, 'b', 1), FARule.new(1, 'b', 2),
+  FARule.new(2, 'a', 3), FARule.new(2, 'b', 3), FARule.new(3, 'a', 4),
+  FARule.new(3, 'b', 4)
+])
+
+# => #<Set: {1, 2}>
+ruleset.next_states(Set[1], 'b')
+# => #<Set: {1, 3, 4}>
+ruleset.next_states(Set[1,2,3], 'a')
+# => #<Set: {1, 2, 4}>
+ruleset.next_states(Set[1,3], 'b')
+```
+
+对ruleset的定义能看得出来吗？ next_states的输入参数是当前状态集合，第二个参数是当前状态的输入数据，返回值是接收输入数据后返回的下一个状态集合。
+
+好的，再下一步就是通过程序来模拟手工的NFA运行，与DFA本质上并没有区别：
+
+```ruby
+
+class NFA < Struct.new(:current_states, :final_states, :ruleset)
+  def accepting?
+    (current_states & final_states).any?       # set intersection operation is empty?
+  end
+
+  def read_char(character)
+    self.current_states = ruleset.next_states(current_states,character)
+  end
+
+  def read_string(str)
+    str.chars.each do |character| 
+      read_char(character)
+    end
+  end
+end
+
+class NFAMaker < Struct.new(:start_state, :final_states, :ruleset)
+  def make_nfa
+    NFA.new(Set[start_state], final_states, ruleset)
+  end
+  
+  def accepts?(str)
+    make_nfa.tap { |nfa| nfa.read_string(str) }.accepting?
+  end
+end
+
+nfa = NFAMaker.new(1, [4], ruleset)
+# => true
+nfa.accepts?('bab')
+# => true
+nfa.accepts?('bababab')
+# => false
+nfa.accepts?('babababa')
+# => true
+nfa.accepts?('bababababbbbbb')
+
+```
+
+哈哈，以上代码最终实现的效果与NFA的的图示所达到的效果一样了，能接受"bab"，“baa”这样倒数第三个字符是'b'字符的字符串。
+
+### 自由移动
 
 （to be continued）
