@@ -330,4 +330,91 @@ nfa.accepts?('bababababbbbbb')
 
 ### 自由移动
 
-（to be continued）
+上一小节中，我们看到了对确定性这个约束条件的放宽给设计NFA的方法带来了一定的表达能力，为了再次提高表达，是否还可以放松哪些条件呢？
+
+回到DFA的层面，很容易设计一台DFA，这个DFA能接受字符a组成的字符串长度是2的倍数（“aa”, "aaaa", ......）。
+
+![](http://wx3.sinaimg.cn/large/a1ac93f3gy1fyuz2lgi1ij20as06t3yg.jpg)
+
+但是，如何设计一台机器，让这台机器既能接受长度是2的倍数也能接受是3的倍数的字符串呢？ 由于之前了解过NFA的概念，于是有人可能随手就实现了以下一台NFA：
+
+![](http://wx2.sinaimg.cn/large/a1ac93f3gy1fyuzaqd9o1j20d009ymxc.jpg)
+
+以上这台NFA确实能接受"aa" "aaaa" "aaa" "aaaaaa"这样的字符串，满足要求。但是仔细一看，其实它也能接受"aaaaa" 这样不满足设计要求的字符串。我靠，不符合设计啊。如果不经过严密思考，一旦NFA比较复杂，那么这种错误一般比较难发现。怎么办呢？
+
+其实已经很接近真相了，最主要是因为这一台NFA要满足2个条件，这两个条件写在一起了，其实我们可以把这两个条件，根据每个条件写出对应的DFA，然后把DFA组合在一起形成一个规模大点的NFA机器。
+
+我们把这种组合特性叫做自由移动，这个特性就是能让NFA在多组状态中做选择的。我们把自由移动这种特性用没有转移输入的箭头来表示：
+
+![](http://wx4.sinaimg.cn/large/a1ac93f3gy1fyuzs6tzkcj20fp0dtmxj.jpg)
+
+上面这台NFA，但如果在当前是状态1。那么它的当前状态就既是2也是4的状态。也就是说，这台NFA的初始状态集合是[1,2,4]。状态1流转只能到2或4，这样就分叉了，根据箭头是回不去状态1的，这样2台DFA各司其职。
+
+那么如果用Ruby怎么模拟NFA中的自由移动呢？ 其实就在RuleSet的规则集合中定义一个无输入并且自由流转的规则。 好的，我们根据这点来根据上图所示的NFA，设置它的规则：
+
+```ruby
+ruleset = NFARuleSet.new([
+  FARule.new(1, nil, 2), FARule.new(1, nil, 4), 
+  FARule.new(2, 'a', 3),
+  FARule.new(3, 'a', 2), 
+  FARule.new(4, 'a', 5), 
+  FARule.new(5, 'a', 6),
+  FARule.new(6, 'a', 4)
+])
+
+# => #<Set: {2, 4}>
+ruleset.next_states(Set[1], nil)
+```
+
+状态1在无输入的情况下的下一个状态集合就是[2,4]。然后需要在RulSet的类中添加一个方法来计算一个状态集合的自由移动，这个方法同样返回一个状态集合：
+
+```ruby
+class NFARuleSet
+  def follow_free_moves(states)
+    more_states = next_states(states, nil)
+
+    if more_states.subset?(states)
+      states
+    else
+      follow_free_moves(states + more_states)
+    end
+  end
+end
+
+# =>  #<Set: {1, 2, 4}>
+ruleset.follow_free_moves(Set[1])
+```
+
+然后，要模拟当前状态的自由移动，重写NFA类中的current_states：
+
+```ruby
+class NFA
+  def current_states
+    ruleset.follow_free_moves(super)
+  end
+end
+```
+这样的意图是，确保NFA当前可能的状态总是通过自由移动流转到任何可能的状态。这就让访问当前状态透明了，之前的代码几乎不用改动。好了，现在可以用之前的NFAMaker构造出一个支持自由移动的NFA了，并且按照上图的NFA设计图，并确保代码可以正确工作了：
+
+```ruby
+nfa = NFAMaker.new(1, [2, 4], ruleset)
+# => true
+nfa.accepts?('aa')
+# => true
+nfa.accepts?('aaa')
+# => false
+nfa.accepts?('aaaaa')
+# => true
+nfa.accepts?('aaaaaa')
+```
+看运行结果，恩，与设想中的一样。能接受2或3的倍数，并且不会出错了。
+
+模拟自由移动比现象中简单，它在非确定的基础上给了设计者额外的设计自由。当然从自动机理论的角度看，这文章中的很多名词并不专业，有限自动机读取的字符一般叫符号（Symbol），状态之间移动的规则叫做转移（transition），组成一台机器的规则集合叫做转移函数,表示空字符串的数学符号是希腊字母ε，能自由移动的NFA称为NFA-ε，自由移动一般叫ε转移。
+
+如果你学过编译原理的国外教材，在讲状态机的时候就会接触到这些，比如把正则表达式通过NFA写出来，就会用到ε转移来组合各种状态机，然后通过子集构造法把NFA规约成DFA。 后面我会讲到有限状态机与正则表达式是等价的，相当与正则表达式是有限自动机的文本表示出来的语言（正则语言，有时候也叫正规语言），而有限状态机是正则语言的解释器。所以当你想从底层实现正则表达式引擎的话，无论如何也绕不过有限状态机理论的。当然有些高级做法，并没有把正则表达式翻译成自动机执行，但是我这里不想过多涉及这样工业界的高级解释器技巧，这已经偏离文章宗旨。
+
+## 正则语言
+
+正则语言也叫正则表达式，这是一个很简单的语言，正因为太简单了，所以在表达一些复杂模式匹配的时候语言会有些晦涩。但是它的单个规则很简单，都是通过简单的规则组合起来用的。这个子章节，我需要用Ruby构造的NFA一步一步来构建最简单的正则表达式的解释器。
+
+（To be contined）
