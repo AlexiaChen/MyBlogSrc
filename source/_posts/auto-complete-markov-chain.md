@@ -109,7 +109,15 @@ process()
 运行以上代码，就可以生成一个150来个单词的"联想"短文了:
 
 ```txt
-magic is not having practised vanishing spells horribly difficult at first but they two thousand racing broom tampering and torture; an interview said harry leaping to their bulky backpacks the nine of the cottages were fewer here and make it too far; it rolled over toward him holding a wand to shoulder wands raised james glancing over his head pound so he went as red as ron who clambered to his determination to shut his eyes wanting to know anything new right before you go upstairs with ron eating their way around the walls and all their shock and exhaustion that the phoenix but after a few horrible seconds he did to open the lestranges vault only once a month later harry kept his eyes was twitching slightly hair whipped back off the pitch but all three of my followers would give better cover they extinguished their fire then he sat down when something of a voice and called out of pure venom at harry his temper getting the exit and when sounds of someone stumbling ftom a room like a venomous bubble compressing his lungs driving all other concerns fled harry s head with a large fir tree blocking the top
+magic is not having practised vanishing spells horribly difficult at first but they two thousand racing broom tampering and torture; 
+an interview said harry leaping to their bulky backpacks the nine of the cottages were fewer here and make it too far; 
+it rolled over toward him holding a wand to shoulder wands raised james glancing over his head pound so he went as red as ron who clambered to
+ his determination to shut his eyes wanting to know anything new right before you go upstairs with ron eating their way around the walls and 
+ all their shock and exhaustion that the phoenix but after a few horrible seconds he did to open the lestranges vault only once a month 
+ later harry kept his eyes was twitching slightly hair whipped back off the 
+ pitch but all three of my followers would give better cover they extinguished their fire then he sat down when something of a voice 
+ and called out of pure venom at harry his temper getting the exit and when sounds of someone stumbling ftom a room like a venomous bubble compressing his lungs driving all other concerns fled 
+ harry s head with a large fir tree blocking the top
 ```
 当然这段短文有点狗屁不通，甚至有点搞笑，我们现在先不管。
 
