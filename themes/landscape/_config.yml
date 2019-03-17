@@ -1,11 +1,9 @@
 # Header
 menu:
-  home: 
-  categories: categories
-  archives: archives
-  tags: tags
-  about: about
-  resume: resume
+  Home: /
+  Archives: /archives
+  About: /about
+  Resume: /resume
 rss: /atom.xml
 
 # Content
@@ -21,13 +19,6 @@ widgets:
 - archive
 - recent_posts
 
-
-# MathJax Support
-mathjax: enable
-
-# buid site start time
-since: 2013
-
 # display widgets at the bottom of index pages (pagination == 2)
 index_widgets:
 # - category
@@ -40,6 +31,7 @@ show_count: false
 
 # Miscellaneous
 google_analytics:
+gauges_analytics:
 favicon: /favicon.png
 twitter:
 google_plus:
