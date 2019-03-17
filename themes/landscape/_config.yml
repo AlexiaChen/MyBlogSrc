@@ -14,11 +14,12 @@ fancybox: true
 sidebar: right
 widgets:
 - category
-- tag
 - tagcloud
 - archive
 - recent_posts
 
+
+since: 2013
 scroll_to_more: true
 
 # display widgets at the bottom of index pages (pagination == 2)
