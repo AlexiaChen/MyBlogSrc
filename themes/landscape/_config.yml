@@ -19,6 +19,8 @@ widgets:
 - archive
 - recent_posts
 
+scroll_to_more: true
+
 # display widgets at the bottom of index pages (pagination == 2)
 index_widgets:
 # - category
