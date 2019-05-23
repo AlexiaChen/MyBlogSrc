@@ -41,7 +41,29 @@ title: resume
 # 工作经历
 ***
 
-## 昆明福人科技有限公司 （2018.03 至 至今）
+## 昆明云链科技有限公司 （2018.08 至 至今）
+
+- **行业**：互联网
+- **职位**： 区块链研发工程师
+- **部门**：研发部
+- **岗位职责**：区块链底层分布式系统底层研发
+
+### FnFn区块链
+**项目描述**： FnFn公链产品 产品官网：www.fnfn.io  产品开源地址：https://github.com/FissionAndFusion/    （公链必须开源，接受同行业检验）
+
+- 区块链底层开发和bug修复 https://github.com/FissionAndFusion/FnFnCoreWallet/pulls
+- 开发了超级节点功能，树形网络拓扑结构管理各个分支出块 （多个PR）
+- 通过protobuf实现Dbp协议，对接light wallet server,以便LWS可以获取链上数据 https://github.com/FissionAndFusion/FnFnCoreWallet/pull/49 
+- 支持IPv6协议 https://github.com/FissionAndFusion/FnFnCoreWallet/pull/213
+- 优化P2P网络的Ban策略 https://github.com/FissionAndFusion/FnFnCoreWallet/pull/228 
+- P2P网络通道的并行消息处理性能优化 https://github.com/FissionAndFusion/FnFnCoreWallet/pull/229
+
+### BaaS平台
+**项目描述**： FnFn公链产品的BaaS（BlockChain as a Service）平台
+
+- 用Golang的Gin框架实现JSON-RPC对接FnFn链的RPC接口的服务
+
+## 昆明福人科技有限公司 （2018.03 至 2018.07）
 
 - **行业**：医疗保险
 - **职位**： 高级软件研发工程师
@@ -100,12 +122,13 @@ title: resume
 
 ***
 
-## 北京星天宇科技有限公司 （2014.07 至 2015.10）
+## 北京闻亭泰科技术发展有限公司 （2013.07 至 2015.10）
 
-- **行业**：航空航天
-- **职位**：C/C++ 软件研发工程师
-- **部门**： 研发部
-- **岗位职责**： 研发航空航天领域相关设备的配套软件
+- **行业**： 电子硬件，半导体嵌入式
+- **职位**：C/C++ 系统软件研发工程师
+- **部门**：研发部
+- **岗位职责**：研发C/C++系统软件
+
 
 ### BSDP项目
 **项目描述**：BSDP项目是为Cortex系列的遥测设备编写的数据处理软件。
@@ -127,15 +150,6 @@ title: resume
 - 使用Live555实现IP Camera传输到PC机上的RTSP流（RTSP协议），RTSP协议承载的是H264编码的视频帧序列，获取每帧的buffer
 - 使用FFmpeg作为解码模块将传输过来的H264帧逐个解码并转换成图像显示
 - 使用Qt实现RTSP监控软件的UI界面，实现多窗口同时监控不同的视频源，监控窗口数量可以自行按照行列配置
-
-***
-
-## 北京闻亭泰科技术发展有限公司 （2013.07 至 2014.06 实习）
-
-- **行业**： 电子硬件，半导体嵌入式
-- **职位**：C/C++ 系统软件研发工程师
-- **部门**：研发部
-- **岗位职责**：研发C/C++系统软件
 
 ### V6项目
 **项目描述**：V6是参照TI公司自己订制的板子，软件，硬件开发（FPGA）都有涉及。软件层面编写SDK与V6板子通信。最终提供给客户进行二次开发。
