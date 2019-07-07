@@ -235,7 +235,7 @@ tags:
 - 罗氏几何（双曲几何）（修改后的第五公设：过直线外一点至少有两条不同的直线和已知直线平行）
 - 黎曼几何（椭圆几何） （修改后的第五公设：过直线外一点所作任何直线都与该直线相交，也就是没有任何一条平行线）
 
-![](https://img3.doubanio.com/view/photo/l/public/p2561091183.jpg)
+![](http://wx4.sinaimg.cn/mw690/a1ac93f3gy1g4romaswt8j20dm05d3yt.jpg)
 
 在非欧几何的研究中，可以导出很多更加有趣的几何性质。
 
@@ -243,7 +243,7 @@ tags:
 - 罗氏几何中，在马鞍面（双曲抛物面）上画一个三角形，其内角和就小于180度。
 - 黎曼几何中，在球面上画一个三角形，其内角和就大于180度。
 
-![](https://img3.doubanio.com/view/photo/l/public/p2561091184.webp)
+![](http://wx3.sinaimg.cn/mw690/a1ac93f3gy1g4romabr0fj20go06b3z0.jpg)
 
 
 理解了黎曼几何，那么就理解了黎曼面上看似平行的平行线其实是会有交点的。可以理解为相交在很远很远的地方，即定义了平行线相交于无穷远点（point at infinity）。
@@ -276,16 +276,16 @@ tags:
 
 该方程的表示是（注意，是三元方程）：
 
-![](https://img3.doubanio.com/view/photo/l/public/p2561103426.webp)
+![](http://wx4.sinaimg.cn/mw690/a1ac93f3gy1g4rom94twwj20dg01idfo.jpg)
 
 
 该方程可以归整到欧式二维平面的方程表示形式：
 
-![](https://img3.doubanio.com/view/photo/m/public/p2561104050.webp)
+![](http://wx3.sinaimg.cn/mw690/a1ac93f3gy1g4rom8opvgj2050017dfl.jpg)
 
 其中a,b为常数系数，以下是a，b不同的取值，表现的椭圆曲线的欧式二维图像：
 
-![](https://img3.doubanio.com/view/photo/m/public/p2561104060.webp)
+![](http://wx1.sinaimg.cn/mw690/a1ac93f3gy1g4rom8aszvj20fg03dt8m.jpg)
 
 所以可以看到，椭圆曲线并不是椭圆形，这个是有历史原因的，因为椭圆曲线方程与求椭圆弧长的椭圆积分的反函数很像。
 
@@ -304,7 +304,7 @@ tags:
 
 以下就是椭圆曲线上P + Q = R的加法运算的图像（网络上很多，随便找的）：
 
-![](https://img3.doubanio.com/view/photo/m/public/p2561110156.webp)
+![](http://wx3.sinaimg.cn/mw690/a1ac93f3gy1g4rom7r27qj20dt0bj0td.jpg)
 
 根据上图，你可以在草稿纸上画，第一眼就可以看出来满足交换律， P + Q = Q + P，
 
